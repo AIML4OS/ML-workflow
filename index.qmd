@@ -5,7 +5,7 @@ include-before-body:
   - text: <img src="resources/cover/main2.png" style="max-width:900px;width:100%"><br>
 author:
   - name: Agnieszka Giemza
-    url: https://github.com/publicstatistician1
+    url: https://github.com/agnieszkagiemza
     email: a.giemza@stat.gov.pl
 date: "2026-01-16"
 doi: "10.1000/182"  # Optional
