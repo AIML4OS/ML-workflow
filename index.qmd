@@ -1,5 +1,5 @@
 ---
-title: "Machine Learning Project: Mushroom Edibility Classification" # See below for multilingual resource
+title: "Machine Learning Process: Mushroom Edibility Classification" # See below for multilingual resource
 format: html # This qmd file will be compiled as HTML only (no notebook)
 include-before-body:
   - text: <img src="resources/cover/main2.png" style="max-width:900px;width:100%"><br>

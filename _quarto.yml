@@ -8,7 +8,7 @@ project:
 
 website:
   page-navigation: true
-  title: "Template for training resources in Python"
+  title: "Machine Learning Process: Mushroom Edibility Classification"
   # In the two URLs below:
   # - replace AIML4OS by the Github account/organization your repository is hosted by;
   # - replace AIML4OS-template-quarto-python by the name of your repository.
