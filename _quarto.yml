@@ -25,7 +25,7 @@ website:
       - href: chapters/chapter1.qmd
         text: Exploratory Data Analysis (EDA)
       - href: chapters/chapter2.qmd
-        text: ML process step by step
+        text: Machine Learning Process Step by Step
 
 format:
   html:

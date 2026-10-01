@@ -24,7 +24,7 @@ The dataset is divided into two parts:
 - `X` contains the predictor variables (features),
 - `y` contains the target variable, indicating whether a mushroom is edible or poisonous.
 
-# Creating a pandas DataFrame
+## Creating a pandas DataFrame
 
 For exploratory data analysis, it is convenient to combine the features and the target variable into a single pandas DataFrame.
 
@@ -120,8 +120,6 @@ This allows us to check:
 
 The variables are categorical and are represented using character codes.
 
-An important issue for further analysis is the presence of missing values. In this dataset, missing information is represented by the character `?` in the `stalk-root` variable. Therefore, although pandas may not identify these values as conventional `NaN` values, they should be treated as missing values during preprocessing.
-
 ## Distribution of the target variable
 
 The next step is to examine the distribution of the target variable.
@@ -181,7 +179,7 @@ For example:
 - `gill-color` has 12 categories,
 - `odor` has 9 categories.
 
-The target variable `poisonous` has two categories.
+
 
 This information is important when deciding how categorical variables should be encoded before applying machine learning algorithms.
 
@@ -213,7 +211,7 @@ plt.show()
 The variables describe different physical characteristics of mushrooms.
 
 | Variable | Number of categories | Description |
-|:-----------|-----------:|:-----------------------------------------------|
+|:--------------|--------------:|:------------------------------------------|
 | `cap-shape` | 6 | `b` = bell, `c` = conical, `x` = convex, `f` = flat, `k` = knobbed, `s` = sunken |
 | `cap-surface` | 4 | `f` = fibrous, `g` = grooves, `y` = scaly, `s` = smooth |
 | `cap-color` | 10 | `n` = brown, `b` = buff, `c` = cinnamon, `g` = gray, `r` = green, `p` = pink, `u` = purple, `e` = red, `w` = white, `y` = yellow |
@@ -278,7 +276,6 @@ A visible separation between the two classes would suggest that the categorical 
 ```{python}
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.decomposition import PCA
-import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib.patches import Ellipse
 import numpy as np
