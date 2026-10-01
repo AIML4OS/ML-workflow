@@ -5,10 +5,12 @@ description = "A basic project template for Python"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "great-tables>=0.17.0",
     "jupyter>=1.1.1",
     "matplotlib>=3.10.3",
     "numpy>=2.2.0",
     "pandas>=2.3.0",
     "scikit-learn>=1.7.0",
     "ucimlrepo>=0.0.7",
+    "
 ]
