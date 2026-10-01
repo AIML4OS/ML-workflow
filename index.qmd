@@ -1,16 +1,13 @@
 ---
-title: "Template for Python training material" # See below for multilingual resource
+title: "Machine Learning Project: Mushroom Edibility Classification" # See below for multilingual resource
 format: html # This qmd file will be compiled as HTML only (no notebook)
 include-before-body:
   - text: <img src="resources/cover/main2.png" style="max-width:900px;width:100%"><br>
 author:
-  - name: Public Statistician 1
+  - name: Agnieszka Giemza
     url: https://github.com/publicstatistician1
-    email: Public.Statistician1@statistics.org
-  - name: Public Statistician 2
-    url: https://github.com/publicstatistician2
-    email: Public.Statistician2@statistics.org
-date: "2025-05-16"
+    email: a.giemza@stat.gov.pl
+date: "2026-01-16"
 doi: "10.1000/182"  # Optional
 license: "CC-BY 4.0"  # Optional
 
@@ -21,7 +18,12 @@ license: "CC-BY 4.0"  # Optional
 # title-fr: "Bonjour SSPCloud"
 
 description: |
-    This template is a fast starting pack for AIML4OS projects that use `Python`. For `R` projects, see [this `Github` repository](https://github.com/InseeFrLab/AIML4OS-template-quarto-r).
+    This project demonstrates a complete machine learning workflow for classifying mushrooms as edible or poisonous using the UCI Mushroom Dataset.
+
+    The analysis guides the user step by step through data exploration, preprocessing, PCA visualization, classification, cross-validation, model comparison, hyperparameter tuning, and final evaluation. Several machine learning algorithms are explored, including Decision Tree, Random Forest, and Support Vector Machine (SVM).
+
+
+    The material is intended for educational purposes and demonstrates the practical application of machine learning to a binary classification problem.
 
 # If resources is multilingual, adopt that structure
 # (need to have both description and description-* fields)
