@@ -4,7 +4,17 @@
     "href": "chapters/chapter1.html",
     "title": "Explanatory Data Analysis (EDA)",
     "section": "",
-    "text": "In the first step, we load the Mushroom dataset from the UCI Machine Learning Repository using the ucimlrepo package.\n\n\nCode\nfrom ucimlrepo import fetch_ucirepo\n\n# Fetch the Mushroom dataset\nmushroom = fetch_ucirepo(id=73)\n\n# Data as pandas DataFrames\nX = mushroom.data.features\ny = mushroom.data.targets\n\n\nThe dataset is divided into two parts:\n\nX contains the predictor variables (features),\ny contains the target variable, indicating whether a mushroom is edible or poisonous.",
+    "text": "In the first step, we load the Mushroom dataset from the UCI Machine Learning Repository using the ucimlrepo package.\n\n\nCode\nfrom ucimlrepo import fetch_ucirepo\n\n# Fetch the Mushroom dataset\nmushroom = fetch_ucirepo(id=73)\n\n# Data as pandas DataFrames\nX = mushroom.data.features\ny = mushroom.data.targets\n\n\nThe dataset is divided into two parts:\n\nX contains the predictor variables (features),\ny contains the target variable, indicating whether a mushroom is edible or poisonous.\n\n\n\nFor exploratory data analysis, it is convenient to combine the features and the target variable into a single pandas DataFrame.\n\n\nCode\nimport pandas as pd\n\n# Combine features and target into one DataFrame\ndf = pd.concat([X, y], axis=1)\n\n# Display the first five observations\ndf.head()\n\n\n\n\n\n\n\n\n\ncap-shape\ncap-surface\ncap-color\nbruises\nodor\ngill-attachment\ngill-spacing\ngill-size\ngill-color\nstalk-shape\n...\nstalk-color-above-ring\nstalk-color-below-ring\nveil-type\nveil-color\nring-number\nring-type\nspore-print-color\npopulation\nhabitat\npoisonous\n\n\n\n\n0\nx\ns\nn\nt\np\nf\nc\nn\nk\ne\n...\nw\nw\np\nw\no\np\nk\ns\nu\np\n\n\n1\nx\ns\ny\nt\na\nf\nc\nb\nk\ne\n...\nw\nw\np\nw\no\np\nn\nn\ng\ne\n\n\n2\nb\ns\nw\nt\nl\nf\nc\nb\nn\ne\n...\nw\nw\np\nw\no\np\nn\nn\nm\ne\n\n\n3\nx\ny\nw\nt\np\nf\nc\nn\nn\ne\n...\nw\nw\np\nw\no\np\nk\ns\nu\np\n\n\n4\nx\ns\ng\nf\nn\nf\nw\nb\nk\nt\n...\nw\nw\np\nw\no\ne\nn\na\ng\ne\n\n\n\n\n5 rows × 23 columns\n\n\n\nWe can also check the basic dimensions and column names of the dataset.\n\n\nCode\n# Dataset dimensions\nprint(\"Dataset shape:\", df.shape)\n\n# Column names\nprint(\"\\nColumn names:\")\nprint(df.columns.tolist())\n\n\nDataset shape: (8124, 23)\n\nColumn names:\n['cap-shape', 'cap-surface', 'cap-color', 'bruises', 'odor', 'gill-attachment', 'gill-spacing', 'gill-size', 'gill-color', 'stalk-shape', 'stalk-root', 'stalk-surface-above-ring', 'stalk-surface-below-ring', 'stalk-color-above-ring', 'stalk-color-below-ring', 'veil-type', 'veil-color', 'ring-number', 'ring-type', 'spore-print-color', 'population', 'habitat', 'poisonous']\n\n\nThe dataset contains 8,124 observations and 23 variables: 22 explanatory variables and one target variable.",
+    "crumbs": [
+      "Exploratory Data Analysis (EDA)"
+    ]
+  },
+  {
+    "objectID": "chapters/chapter1.html#creating-a-pandas-dataframe",
+    "href": "chapters/chapter1.html#creating-a-pandas-dataframe",
+    "title": "Explanatory Data Analysis (EDA)",
+    "section": "",
+    "text": "For exploratory data analysis, it is convenient to combine the features and the target variable into a single pandas DataFrame.\n\n\nCode\nimport pandas as pd\n\n# Combine features and target into one DataFrame\ndf = pd.concat([X, y], axis=1)\n\n# Display the first five observations\ndf.head()\n\n\n\n\n\n\n\n\n\ncap-shape\ncap-surface\ncap-color\nbruises\nodor\ngill-attachment\ngill-spacing\ngill-size\ngill-color\nstalk-shape\n...\nstalk-color-above-ring\nstalk-color-below-ring\nveil-type\nveil-color\nring-number\nring-type\nspore-print-color\npopulation\nhabitat\npoisonous\n\n\n\n\n0\nx\ns\nn\nt\np\nf\nc\nn\nk\ne\n...\nw\nw\np\nw\no\np\nk\ns\nu\np\n\n\n1\nx\ns\ny\nt\na\nf\nc\nb\nk\ne\n...\nw\nw\np\nw\no\np\nn\nn\ng\ne\n\n\n2\nb\ns\nw\nt\nl\nf\nc\nb\nn\ne\n...\nw\nw\np\nw\no\np\nn\nn\nm\ne\n\n\n3\nx\ny\nw\nt\np\nf\nc\nn\nn\ne\n...\nw\nw\np\nw\no\np\nk\ns\nu\np\n\n\n4\nx\ns\ng\nf\nn\nf\nw\nb\nk\nt\n...\nw\nw\np\nw\no\ne\nn\na\ng\ne\n\n\n\n\n5 rows × 23 columns\n\n\n\nWe can also check the basic dimensions and column names of the dataset.\n\n\nCode\n# Dataset dimensions\nprint(\"Dataset shape:\", df.shape)\n\n# Column names\nprint(\"\\nColumn names:\")\nprint(df.columns.tolist())\n\n\nDataset shape: (8124, 23)\n\nColumn names:\n['cap-shape', 'cap-surface', 'cap-color', 'bruises', 'odor', 'gill-attachment', 'gill-spacing', 'gill-size', 'gill-color', 'stalk-shape', 'stalk-root', 'stalk-surface-above-ring', 'stalk-surface-below-ring', 'stalk-color-above-ring', 'stalk-color-below-ring', 'veil-type', 'veil-color', 'ring-number', 'ring-type', 'spore-print-color', 'population', 'habitat', 'poisonous']\n\n\nThe dataset contains 8,124 observations and 23 variables: 22 explanatory variables and one target variable.",
     "crumbs": [
       "Exploratory Data Analysis (EDA)"
     ]
@@ -14,7 +24,7 @@
     "href": "chapters/chapter1.html#dataset-structure",
     "title": "Explanatory Data Analysis (EDA)",
     "section": "Dataset structure",
-    "text": "Dataset structure\nFirst, we inspect the general structure of the DataFrame using info().\n\n\nCode\ndf.info()\n\n\n&lt;class 'pandas.core.frame.DataFrame'&gt;\nRangeIndex: 8124 entries, 0 to 8123\nData columns (total 23 columns):\n #   Column                    Non-Null Count  Dtype \n---  ------                    --------------  ----- \n 0   cap-shape                 8124 non-null   object\n 1   cap-surface               8124 non-null   object\n 2   cap-color                 8124 non-null   object\n 3   bruises                   8124 non-null   object\n 4   odor                      8124 non-null   object\n 5   gill-attachment           8124 non-null   object\n 6   gill-spacing              8124 non-null   object\n 7   gill-size                 8124 non-null   object\n 8   gill-color                8124 non-null   object\n 9   stalk-shape               8124 non-null   object\n 10  stalk-root                5644 non-null   object\n 11  stalk-surface-above-ring  8124 non-null   object\n 12  stalk-surface-below-ring  8124 non-null   object\n 13  stalk-color-above-ring    8124 non-null   object\n 14  stalk-color-below-ring    8124 non-null   object\n 15  veil-type                 8124 non-null   object\n 16  veil-color                8124 non-null   object\n 17  ring-number               8124 non-null   object\n 18  ring-type                 8124 non-null   object\n 19  spore-print-color         8124 non-null   object\n 20  population                8124 non-null   object\n 21  habitat                   8124 non-null   object\n 22  poisonous                 8124 non-null   object\ndtypes: object(23)\nmemory usage: 1.4+ MB\n\n\nThis allows us to check:\n\nthe number of observations,\nthe number of variables,\ncolumn names,\ndata types,\nand the number of non-null observations.\n\nThe variables are categorical and are represented using character codes.\nAn important issue for further analysis is the presence of missing values. In this dataset, missing information is represented by the character ? in the stalk-root variable. Therefore, although pandas may not identify these values as conventional NaN values, they should be treated as missing values during preprocessing.",
+    "text": "Dataset structure\nFirst, we inspect the general structure of the DataFrame using info().\n\n\nCode\ndf.info()\n\n\n&lt;class 'pandas.core.frame.DataFrame'&gt;\nRangeIndex: 8124 entries, 0 to 8123\nData columns (total 23 columns):\n #   Column                    Non-Null Count  Dtype \n---  ------                    --------------  ----- \n 0   cap-shape                 8124 non-null   object\n 1   cap-surface               8124 non-null   object\n 2   cap-color                 8124 non-null   object\n 3   bruises                   8124 non-null   object\n 4   odor                      8124 non-null   object\n 5   gill-attachment           8124 non-null   object\n 6   gill-spacing              8124 non-null   object\n 7   gill-size                 8124 non-null   object\n 8   gill-color                8124 non-null   object\n 9   stalk-shape               8124 non-null   object\n 10  stalk-root                5644 non-null   object\n 11  stalk-surface-above-ring  8124 non-null   object\n 12  stalk-surface-below-ring  8124 non-null   object\n 13  stalk-color-above-ring    8124 non-null   object\n 14  stalk-color-below-ring    8124 non-null   object\n 15  veil-type                 8124 non-null   object\n 16  veil-color                8124 non-null   object\n 17  ring-number               8124 non-null   object\n 18  ring-type                 8124 non-null   object\n 19  spore-print-color         8124 non-null   object\n 20  population                8124 non-null   object\n 21  habitat                   8124 non-null   object\n 22  poisonous                 8124 non-null   object\ndtypes: object(23)\nmemory usage: 1.4+ MB\n\n\nThis allows us to check:\n\nthe number of observations,\nthe number of variables,\ncolumn names,\ndata types,\nand the number of non-null observations.\n\nThe variables are categorical and are represented using character codes.",
     "crumbs": [
       "Exploratory Data Analysis (EDA)"
     ]
@@ -34,7 +44,7 @@
     "href": "chapters/chapter1.html#number-of-unique-values-in-each-variable",
     "title": "Explanatory Data Analysis (EDA)",
     "section": "Number of unique values in each variable",
-    "text": "Number of unique values in each variable\nThe next step is to determine how many unique categories are present in each variable.\n\n\nCode\nunique_values = pd.DataFrame({\n    \"variable\": df.columns,\n    \"unique_values\": df.nunique()\n})\n\nunique_values\n\n\n\n\n\n\n\n\n\nvariable\nunique_values\n\n\n\n\ncap-shape\ncap-shape\n6\n\n\ncap-surface\ncap-surface\n4\n\n\ncap-color\ncap-color\n10\n\n\nbruises\nbruises\n2\n\n\nodor\nodor\n9\n\n\ngill-attachment\ngill-attachment\n2\n\n\ngill-spacing\ngill-spacing\n2\n\n\ngill-size\ngill-size\n2\n\n\ngill-color\ngill-color\n12\n\n\nstalk-shape\nstalk-shape\n2\n\n\nstalk-root\nstalk-root\n4\n\n\nstalk-surface-above-ring\nstalk-surface-above-ring\n4\n\n\nstalk-surface-below-ring\nstalk-surface-below-ring\n4\n\n\nstalk-color-above-ring\nstalk-color-above-ring\n9\n\n\nstalk-color-below-ring\nstalk-color-below-ring\n9\n\n\nveil-type\nveil-type\n1\n\n\nveil-color\nveil-color\n4\n\n\nring-number\nring-number\n3\n\n\nring-type\nring-type\n5\n\n\nspore-print-color\nspore-print-color\n9\n\n\npopulation\npopulation\n6\n\n\nhabitat\nhabitat\n7\n\n\npoisonous\npoisonous\n2\n\n\n\n\n\n\n\nThis analysis shows that the variables have different numbers of categories.\nFor example:\n\nbruises has 2 categories,\ncap-surface has 4 categories,\ncap-color has 10 categories,\ngill-color has 12 categories,\nodor has 9 categories.\n\nThe target variable poisonous has two categories.\nThis information is important when deciding how categorical variables should be encoded before applying machine learning algorithms.\nWe can also visualize the number of categories for each variable.\n\n\nCode\nunique_values_sorted = unique_values.sort_values(\n    \"unique_values\",\n    ascending=True\n)\n\nunique_values_sorted.plot(\n    x=\"variable\",\n    y=\"unique_values\",\n    kind=\"barh\",\n    figsize=(8, 8),\n    legend=False\n)\n\nplt.title(\"Number of unique categories by variable\")\nplt.xlabel(\"Number of unique values\")\nplt.ylabel(\"Variable\")\nplt.tight_layout()\nplt.show()",
+    "text": "Number of unique values in each variable\nThe next step is to determine how many unique categories are present in each variable.\n\n\nCode\nunique_values = pd.DataFrame({\n    \"variable\": df.columns,\n    \"unique_values\": df.nunique()\n})\n\nunique_values\n\n\n\n\n\n\n\n\n\nvariable\nunique_values\n\n\n\n\ncap-shape\ncap-shape\n6\n\n\ncap-surface\ncap-surface\n4\n\n\ncap-color\ncap-color\n10\n\n\nbruises\nbruises\n2\n\n\nodor\nodor\n9\n\n\ngill-attachment\ngill-attachment\n2\n\n\ngill-spacing\ngill-spacing\n2\n\n\ngill-size\ngill-size\n2\n\n\ngill-color\ngill-color\n12\n\n\nstalk-shape\nstalk-shape\n2\n\n\nstalk-root\nstalk-root\n4\n\n\nstalk-surface-above-ring\nstalk-surface-above-ring\n4\n\n\nstalk-surface-below-ring\nstalk-surface-below-ring\n4\n\n\nstalk-color-above-ring\nstalk-color-above-ring\n9\n\n\nstalk-color-below-ring\nstalk-color-below-ring\n9\n\n\nveil-type\nveil-type\n1\n\n\nveil-color\nveil-color\n4\n\n\nring-number\nring-number\n3\n\n\nring-type\nring-type\n5\n\n\nspore-print-color\nspore-print-color\n9\n\n\npopulation\npopulation\n6\n\n\nhabitat\nhabitat\n7\n\n\npoisonous\npoisonous\n2\n\n\n\n\n\n\n\nThis analysis shows that the variables have different numbers of categories.\nFor example:\n\nbruises has 2 categories,\ncap-surface has 4 categories,\ncap-color has 10 categories,\ngill-color has 12 categories,\nodor has 9 categories.\n\nThis information is important when deciding how categorical variables should be encoded before applying machine learning algorithms.\nWe can also visualize the number of categories for each variable.\n\n\nCode\nunique_values_sorted = unique_values.sort_values(\n    \"unique_values\",\n    ascending=True\n)\n\nunique_values_sorted.plot(\n    x=\"variable\",\n    y=\"unique_values\",\n    kind=\"barh\",\n    figsize=(8, 8),\n    legend=False\n)\n\nplt.title(\"Number of unique categories by variable\")\nplt.xlabel(\"Number of unique values\")\nplt.ylabel(\"Variable\")\nplt.tight_layout()\nplt.show()",
     "crumbs": [
       "Exploratory Data Analysis (EDA)"
     ]
@@ -64,7 +74,7 @@
     "href": "chapters/chapter1.html#relationship-between-odor-and-the-target-variable",
     "title": "Explanatory Data Analysis (EDA)",
     "section": "Relationship between odor and the target variable",
-    "text": "Relationship between odor and the target variable\n\nPrincipal Component Analysis\nPrincipal Component Analysis (PCA) is used here to visualize the overall structure of the Mushroom dataset in a two-dimensional space. Since all explanatory variables are categorical, they are first transformed using one-hot encoding.\nThe first two principal components are then used to project the 8,124 observations onto a two-dimensional plane. Each point represents one mushroom, while the colour indicates whether the mushroom is edible or poisonous.\nThe ellipses indicate the approximate spread of observations within each class. They help assess whether the two classes occupy clearly separated regions of the feature space.\nThe percentage shown on each axis represents the proportion of variance explained by the corresponding principal component. The combined percentage indicates how much of the variation in the encoded dataset is represented by the two-dimensional PCA projection.\nA visible separation between the two classes would suggest that the categorical characteristics contain a substantial amount of information related to the target variable.\n\n\nCode\nfrom sklearn.preprocessing import OneHotEncoder\nfrom sklearn.decomposition import PCA\nimport pandas as pd\nimport matplotlib.pyplot as plt\nfrom matplotlib.patches import Ellipse\nimport numpy as np\n\n# Separate predictors and target\nX = df.drop(columns=\"poisonous\")\ny = df[\"poisonous\"]\n\n# Treat '?' as a missing-value code\nX = X.replace(\"?\", pd.NA)\n\n# One-hot encoding of categorical variables\nencoder = OneHotEncoder(\n    handle_unknown=\"ignore\",\n    sparse_output=False\n)\n\nX_encoded = encoder.fit_transform(X)\n\n# PCA\npca = PCA(n_components=2)\nX_pca = pca.fit_transform(X_encoded)\n\npca_df = pd.DataFrame(\n    X_pca,\n    columns=[\"PC1\", \"PC2\"]\n)\n\npca_df[\"Class\"] = y.map({\n    \"e\": \"Edible\",\n    \"p\": \"Poisonous\"\n})\n\nexplained_pc1 = pca.explained_variance_ratio_[0]\nexplained_pc2 = pca.explained_variance_ratio_[1]\nexplained_total = explained_pc1 + explained_pc2\n\n\n# Function for confidence ellipse\ndef add_confidence_ellipse(ax, x, y, n_std=2):\n    covariance = np.cov(x, y)\n    eigenvalues, eigenvectors = np.linalg.eigh(covariance)\n\n    order = eigenvalues.argsort()[::-1]\n    eigenvalues = eigenvalues[order]\n    eigenvectors = eigenvectors[:, order]\n\n    angle = np.degrees(\n        np.arctan2(\n            eigenvectors[1, 0],\n            eigenvectors[0, 0]\n        )\n    )\n\n    width, height = 2 * n_std * np.sqrt(eigenvalues)\n\n    ellipse = Ellipse(\n        xy=(np.mean(x), np.mean(y)),\n        width=width,\n        height=height,\n        angle=angle,\n        fill=False,\n        linewidth=2\n    )\n\n    ax.add_patch(ellipse)\n\n\n# Create figure\nfig, ax = plt.subplots(figsize=(11, 7))\n\n# Plot both classes\nfor class_name in [\"Edible\", \"Poisonous\"]:\n\n    subset = pca_df[pca_df[\"Class\"] == class_name]\n\n    ax.scatter(\n        subset[\"PC1\"],\n        subset[\"PC2\"],\n        s=18,\n        alpha=0.25,\n        label=class_name\n    )\n\n    add_confidence_ellipse(\n        ax,\n        subset[\"PC1\"].values,\n        subset[\"PC2\"].values,\n        n_std=2\n    )\n\n\n# Labels\nax.set_xlabel(\n    f\"PC1 — {explained_pc1:.1%} of variance\",\n    fontsize=11\n)\n\nax.set_ylabel(\n    f\"PC2 — {explained_pc2:.1%} of variance\",\n    fontsize=11\n)\n\nax.set_title(\n    \"PCA Projection of the Mushroom Dataset\",\n    fontsize=15,\n    pad=15\n)\n\nax.legend(\n    title=\"Mushroom class\",\n    frameon=False\n)\n\nax.grid(\n    alpha=0.15,\n    linestyle=\"--\"\n)\n\n# Remove unnecessary borders\nax.spines[\"top\"].set_visible(False)\nax.spines[\"right\"].set_visible(False)\n\n# Annotation\nax.text(\n    0.02,\n    0.02,\n    f\"PC1 + PC2 explain {explained_total:.1%} of total variance\",\n    transform=ax.transAxes,\n    fontsize=10\n)\n\nplt.tight_layout()\nplt.show()",
+    "text": "Relationship between odor and the target variable\n\nPrincipal Component Analysis\nPrincipal Component Analysis (PCA) is used here to visualize the overall structure of the Mushroom dataset in a two-dimensional space. Since all explanatory variables are categorical, they are first transformed using one-hot encoding.\nThe first two principal components are then used to project the 8,124 observations onto a two-dimensional plane. Each point represents one mushroom, while the colour indicates whether the mushroom is edible or poisonous.\nThe ellipses indicate the approximate spread of observations within each class. They help assess whether the two classes occupy clearly separated regions of the feature space.\nThe percentage shown on each axis represents the proportion of variance explained by the corresponding principal component. The combined percentage indicates how much of the variation in the encoded dataset is represented by the two-dimensional PCA projection.\nA visible separation between the two classes would suggest that the categorical characteristics contain a substantial amount of information related to the target variable.\n\n\nCode\nfrom sklearn.preprocessing import OneHotEncoder\nfrom sklearn.decomposition import PCA\nimport matplotlib.pyplot as plt\nfrom matplotlib.patches import Ellipse\nimport numpy as np\n\n# Separate predictors and target\nX = df.drop(columns=\"poisonous\")\ny = df[\"poisonous\"]\n\n# Treat '?' as a missing-value code\nX = X.replace(\"?\", pd.NA)\n\n# One-hot encoding of categorical variables\nencoder = OneHotEncoder(\n    handle_unknown=\"ignore\",\n    sparse_output=False\n)\n\nX_encoded = encoder.fit_transform(X)\n\n# PCA\npca = PCA(n_components=2)\nX_pca = pca.fit_transform(X_encoded)\n\npca_df = pd.DataFrame(\n    X_pca,\n    columns=[\"PC1\", \"PC2\"]\n)\n\npca_df[\"Class\"] = y.map({\n    \"e\": \"Edible\",\n    \"p\": \"Poisonous\"\n})\n\nexplained_pc1 = pca.explained_variance_ratio_[0]\nexplained_pc2 = pca.explained_variance_ratio_[1]\nexplained_total = explained_pc1 + explained_pc2\n\n\n# Function for confidence ellipse\ndef add_confidence_ellipse(ax, x, y, n_std=2):\n    covariance = np.cov(x, y)\n    eigenvalues, eigenvectors = np.linalg.eigh(covariance)\n\n    order = eigenvalues.argsort()[::-1]\n    eigenvalues = eigenvalues[order]\n    eigenvectors = eigenvectors[:, order]\n\n    angle = np.degrees(\n        np.arctan2(\n            eigenvectors[1, 0],\n            eigenvectors[0, 0]\n        )\n    )\n\n    width, height = 2 * n_std * np.sqrt(eigenvalues)\n\n    ellipse = Ellipse(\n        xy=(np.mean(x), np.mean(y)),\n        width=width,\n        height=height,\n        angle=angle,\n        fill=False,\n        linewidth=2\n    )\n\n    ax.add_patch(ellipse)\n\n\n# Create figure\nfig, ax = plt.subplots(figsize=(11, 7))\n\n# Plot both classes\nfor class_name in [\"Edible\", \"Poisonous\"]:\n\n    subset = pca_df[pca_df[\"Class\"] == class_name]\n\n    ax.scatter(\n        subset[\"PC1\"],\n        subset[\"PC2\"],\n        s=18,\n        alpha=0.25,\n        label=class_name\n    )\n\n    add_confidence_ellipse(\n        ax,\n        subset[\"PC1\"].values,\n        subset[\"PC2\"].values,\n        n_std=2\n    )\n\n\n# Labels\nax.set_xlabel(\n    f\"PC1 — {explained_pc1:.1%} of variance\",\n    fontsize=11\n)\n\nax.set_ylabel(\n    f\"PC2 — {explained_pc2:.1%} of variance\",\n    fontsize=11\n)\n\nax.set_title(\n    \"PCA Projection of the Mushroom Dataset\",\n    fontsize=15,\n    pad=15\n)\n\nax.legend(\n    title=\"Mushroom class\",\n    frameon=False\n)\n\nax.grid(\n    alpha=0.15,\n    linestyle=\"--\"\n)\n\n# Remove unnecessary borders\nax.spines[\"top\"].set_visible(False)\nax.spines[\"right\"].set_visible(False)\n\n# Annotation\nax.text(\n    0.02,\n    0.02,\n    f\"PC1 + PC2 explain {explained_total:.1%} of total variance\",\n    transform=ax.transAxes,\n    fontsize=10\n)\n\nplt.tight_layout()\nplt.show()",
     "crumbs": [
       "Exploratory Data Analysis (EDA)"
     ]
@@ -86,7 +96,7 @@
     "section": "",
     "text": "The aim of this analysis is to build a classification model that predicts whether a mushroom is edible or poisonous based on its characteristics.\nThe target variable is:\n\ne — edible\np — poisonous\n\nThis is a binary classification problem, because the target variable contains two possible classes.\nThe main objective is not only to achieve a high overall classification accuracy, but also to make sure that poisonous mushrooms are correctly identified.\n\nImportant: This dataset is used for demonstrating machine learning methods. A model trained on this dataset should not be used to determine whether a real mushroom is safe to eat.",
     "crumbs": [
-      "ML process step by step"
+      "Machine Learning Process Step by Step"
     ]
   },
   {
@@ -96,7 +106,7 @@
     "section": "Check the target variable",
     "text": "Check the target variable\n\n\nCode\ndf[\"poisonous\"].value_counts() \n\n\npoisonous\ne    4208\np    3916\nName: count, dtype: int64\n\n\nWe can also calculate the percentage of each class.\n\n\nCode\ndf[\"poisonous\"].value_counts(normalize=True).mul(100).round(2) \n\n\npoisonous\ne    51.8\np    48.2\nName: proportion, dtype: float64\n\n\nThe two classes are relatively balanced. Therefore, accuracy can provide useful information, but it should not be considered the only evaluation metric.",
     "crumbs": [
-      "ML process step by step"
+      "Machine Learning Process Step by Step"
     ]
   },
   {
@@ -106,7 +116,7 @@
     "section": "Decision Tree",
     "text": "Decision Tree\nA decision tree creates a sequence of rules that divide the observations into groups.\nFor example, the model may learn that a particular combination of mushroom characteristics is strongly associated with the poisonous class.\nDecision trees are also relatively easy to interpret.\n\n\nCode\nfrom sklearn.tree import DecisionTreeClassifier  \ndecision_tree = Pipeline([     (\"encoder\", OneHotEncoder(         handle_unknown=\"ignore\",         sparse_output=True     )),     (\"model\", DecisionTreeClassifier(         random_state=42     )) ])",
     "crumbs": [
-      "ML process step by step"
+      "Machine Learning Process Step by Step"
     ]
   },
   {
@@ -116,7 +126,7 @@
     "section": "Random Forest",
     "text": "Random Forest\nRandom Forest is an ensemble method based on multiple decision trees.\nEach tree is trained using a different sample of the data and a different subset of variables. The final prediction is obtained by combining the predictions of the individual trees.\n\n\nCode\nfrom sklearn.ensemble import RandomForestClassifier  \nrandom_forest = Pipeline([     (\"encoder\", OneHotEncoder(         handle_unknown=\"ignore\",         sparse_output=True     )),     (\"model\", RandomForestClassifier(         n_estimators=200,         random_state=42,         n_jobs=-1     )) ])",
     "crumbs": [
-      "ML process step by step"
+      "Machine Learning Process Step by Step"
     ]
   },
   {
@@ -126,7 +136,7 @@
     "section": "Support Vector Machine",
     "text": "Support Vector Machine\nSupport Vector Machine (SVM) attempts to find a decision boundary that separates the classes.\nSVM can be effective when the classes are separated by complex relationships between the input variables.\n\n\nCode\nfrom sklearn.svm import SVC  \nsvm = Pipeline([     (\"encoder\", OneHotEncoder(         handle_unknown=\"ignore\",         sparse_output=True     )),     (\"model\", SVC(         random_state=42     )) ])",
     "crumbs": [
-      "ML process step by step"
+      "Machine Learning Process Step by Step"
     ]
   },
   {
@@ -136,7 +146,7 @@
     "section": "Accuracy",
     "text": "Accuracy\n\n\nCode\ntest_accuracy = accuracy_score(     y_test,     y_pred )  \nprint(f\"Accuracy: {test_accuracy:.4f}\") \n\n\nAccuracy: 0.9988",
     "crumbs": [
-      "ML process step by step"
+      "Machine Learning Process Step by Step"
     ]
   },
   {
@@ -146,7 +156,7 @@
     "section": "Precision",
     "text": "Precision\n\n\nCode\ntest_precision = precision_score(     y_test,     y_pred,     pos_label=\"p\" )  \nprint(f\"Precision: {test_precision:.4f}\") \n\n\nPrecision: 1.0000",
     "crumbs": [
-      "ML process step by step"
+      "Machine Learning Process Step by Step"
     ]
   },
   {
@@ -156,7 +166,7 @@
     "section": "Recall",
     "text": "Recall\n\n\nCode\ntest_recall = recall_score(     y_test,     y_pred,     pos_label=\"p\" )  \nprint(f\"Recall: {test_recall:.4f}\") \n\n\nRecall: 0.9974\n\n\nWe can display all metrics together:\n\n\nCode\nfinal_metrics = pd.DataFrame({     \"Metric\": [         \"Accuracy\",         \"Precision\",         \"Recall\"     ],     \"Score\": [         test_accuracy,         test_precision,         test_recall     ] })  \nfinal_metrics \n\n\n\n\n\n\n\n\n\nMetric\nScore\n\n\n\n\n0\nAccuracy\n0.998769\n\n\n1\nPrecision\n1.000000\n\n\n2\nRecall\n0.997446",
     "crumbs": [
-      "ML process step by step"
+      "Machine Learning Process Step by Step"
     ]
   },
   {
@@ -166,7 +176,7 @@
     "section": "1. Class balance",
     "text": "1. Class balance\nThe distribution of the two target classes should be examined.\nIf one class is substantially more common than the other, accuracy can become misleading.\n\n\nCode\ny_train.value_counts(normalize=True).mul(100).round(2) \n\n\npoisonous\ne    51.79\np    48.21\nName: proportion, dtype: float64",
     "crumbs": [
-      "ML process step by step"
+      "Machine Learning Process Step by Step"
     ]
   },
   {
@@ -176,7 +186,7 @@
     "section": "2. Accuracy",
     "text": "2. Accuracy\nAccuracy provides an overall measure of how many predictions are correct.\nHowever, it does not distinguish between different types of classification errors.",
     "crumbs": [
-      "ML process step by step"
+      "Machine Learning Process Step by Step"
     ]
   },
   {
@@ -186,7 +196,7 @@
     "section": "3. Precision",
     "text": "3. Precision\nPrecision tells us how reliable the model is when it predicts that a mushroom is poisonous.\nA low precision means that the model produces more false alarms by classifying edible mushrooms as poisonous.",
     "crumbs": [
-      "ML process step by step"
+      "Machine Learning Process Step by Step"
     ]
   },
   {
@@ -196,7 +206,7 @@
     "section": "4. Recall",
     "text": "4. Recall\nRecall measures how many of the actually poisonous mushrooms are correctly identified.\nFor this particular classification problem, recall for the poisonous class deserves particular attention because a false negative corresponds to a poisonous mushroom being classified as edible.",
     "crumbs": [
-      "ML process step by step"
+      "Machine Learning Process Step by Step"
     ]
   },
   {
@@ -206,7 +216,7 @@
     "section": "5. Confusion matrix",
     "text": "5. Confusion matrix\nThe confusion matrix should be examined to understand exactly which types of errors the model makes.\nIn particular, the number of:\nFalse Negatives = poisonous mushrooms classified as edible\nshould be carefully monitored.",
     "crumbs": [
-      "ML process step by step"
+      "Machine Learning Process Step by Step"
     ]
   },
   {
@@ -216,7 +226,7 @@
     "section": "6. Cross-validation",
     "text": "6. Cross-validation\nCross-validation provides information about how stable the model’s performance is across different subsets of the training data.\nLarge differences between folds may indicate that model performance depends strongly on the particular observations used for training.",
     "crumbs": [
-      "ML process step by step"
+      "Machine Learning Process Step by Step"
     ]
   },
   {
@@ -226,7 +236,7 @@
     "section": "7. Generalization to unseen data",
     "text": "7. Generalization to unseen data\nThe final model should be evaluated on observations that were not used during model development.\nThe test set provides one such evaluation. Ideally, an additional independent dataset should also be used to assess how well the model generalizes to new observations.",
     "crumbs": [
-      "ML process step by step"
+      "Machine Learning Process Step by Step"
     ]
   }
 ]

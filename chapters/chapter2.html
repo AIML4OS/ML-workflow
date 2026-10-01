@@ -160,7 +160,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/chapter2.html">ML process step by step</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/chapter2.html">Machine Learning Process Step by Step</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -201,7 +201,7 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/chapter2.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">ML process step by step</span></a>
+ <span class="menu-text">Machine Learning Process Step by Step</span></a>
   </div>
 </li>
     </ul>
@@ -321,7 +321,7 @@ window.Quarto = {
 </ul>
 <p>One-hot encoding transforms these categories into binary variables.</p>
 <p>We will also treat <code>?</code> as a missing-value code. In this dataset, <code>?</code> occurs for some categorical characteristics and should not be treated as an ordinary category.</p>
-<div id="9e50f3b1" class="cell" data-execution_count="1">
+<div id="8d262c52" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -497,7 +497,7 @@ window.Quarto = {
 </div>
 <section id="check-the-target-variable" class="level2">
 <h2 class="anchored" data-anchor-id="check-the-target-variable">Check the target variable</h2>
-<div id="282a0a97" class="cell" data-execution_count="2">
+<div id="346d584a" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"poisonous"</span>].value_counts() </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -510,7 +510,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 <p>We can also calculate the percentage of each class.</p>
-<div id="36f87736" class="cell" data-execution_count="3">
+<div id="1c0a4c86" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"poisonous"</span>].value_counts(normalize<span class="op">=</span><span class="va">True</span>).mul(<span class="dv">100</span>).<span class="bu">round</span>(<span class="dv">2</span>) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -535,7 +535,7 @@ Name: proportion, dtype: float64</code></pre>
 <p>The training set is used to train and compare the models.</p>
 <p>The test set is kept separate and is used only for the final evaluation.</p>
 <p>We use <code>stratify=y</code> to preserve approximately the same proportion of edible and poisonous mushrooms in both datasets.</p>
-<div id="b2e61fb2" class="cell" data-execution_count="4">
+<div id="92f3bf00" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
@@ -553,7 +553,7 @@ Test observations: 1625</code></pre>
 </div>
 </div>
 <p>We can verify the class distribution in both datasets.</p>
-<div id="20b9a37d" class="cell" data-execution_count="5">
+<div id="7080fa5c" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Training set:"</span>) </span>
@@ -581,7 +581,7 @@ Name: proportion, dtype: float64</code></pre>
 <p>All explanatory variables are categorical.</p>
 <p>We use <code>OneHotEncoder</code> to convert them into numerical variables.</p>
 <p>The encoder is placed inside a <code>Pipeline</code>. This is important because the encoding is then fitted separately within each training fold during cross-validation.</p>
-<div id="2b9255a0" class="cell" data-execution_count="6">
+<div id="daaeefb4" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> OneHotEncoder </span>
@@ -604,7 +604,7 @@ Name: proportion, dtype: float64</code></pre>
 <p>A decision tree creates a sequence of rules that divide the observations into groups.</p>
 <p>For example, the model may learn that a particular combination of mushroom characteristics is strongly associated with the poisonous class.</p>
 <p>Decision trees are also relatively easy to interpret.</p>
-<div id="cdee5995" class="cell" data-execution_count="7">
+<div id="6969c2d5" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.tree <span class="im">import</span> DecisionTreeClassifier  </span>
@@ -616,7 +616,7 @@ Name: proportion, dtype: float64</code></pre>
 <h2 class="anchored" data-anchor-id="random-forest">Random Forest</h2>
 <p>Random Forest is an ensemble method based on multiple decision trees.</p>
 <p>Each tree is trained using a different sample of the data and a different subset of variables. The final prediction is obtained by combining the predictions of the individual trees.</p>
-<div id="f7d96b3b" class="cell" data-execution_count="8">
+<div id="358056dd" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestClassifier  </span>
@@ -628,7 +628,7 @@ Name: proportion, dtype: float64</code></pre>
 <h2 class="anchored" data-anchor-id="support-vector-machine">Support Vector Machine</h2>
 <p>Support Vector Machine (SVM) attempts to find a decision boundary that separates the classes.</p>
 <p>SVM can be effective when the classes are separated by complex relationships between the input variables.</p>
-<div id="7fe809d1" class="cell" data-execution_count="9">
+<div id="8902bcda" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.svm <span class="im">import</span> SVC  </span>
@@ -722,7 +722,7 @@ Recall = \\frac{TP}{TP + FN}\]</span></p>
 <p>The training data is divided into five parts. The model is trained on four parts and evaluated on the remaining part.</p>
 <p>This process is repeated five times, with each part used as the validation set once.</p>
 <p>Cross-validation gives us a more stable estimate of model performance and allows us to compare different algorithms using the same data.</p>
-<div id="8f270e97" class="cell" data-execution_count="10">
+<div id="4b2f6170" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> StratifiedKFold, cross_validate  </span>
@@ -731,7 +731,7 @@ Recall = \\frac{TP}{TP + FN}\]</span></p>
 </div>
 <p>We will evaluate the models using accuracy, precision and recall.</p>
 <p>Because poisonous mushrooms are the positive class, <code>pos_label="p"</code> is used for precision and recall.</p>
-<div id="a7b4dcb1" class="cell" data-execution_count="11">
+<div id="2a23f576" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> (     accuracy_score,     precision_score,     recall_score,     make_scorer )  </span>
@@ -742,7 +742,7 @@ Recall = \\frac{TP}{TP + FN}\]</span></p>
 </section>
 <section id="comparing-the-models-using-cross-validation" class="level1">
 <h1>Comparing the models using cross-validation</h1>
-<div id="d9752430" class="cell" data-execution_count="12">
+<div id="2085fd1d" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>models <span class="op">=</span> {<span class="st">"Decision Tree"</span>:decision_tree, </span>
@@ -786,7 +786,7 @@ Recall = \\frac{TP}{TP + FN}\]</span></p>
 </div>
 </div>
 <p>To make the comparison easier to read:</p>
-<div id="adee16cb" class="cell" data-execution_count="13">
+<div id="97cce3ba" class="cell" data-execution_count="13">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>cv_results.sort_values(     by<span class="op">=</span><span class="st">"Recall"</span>,     ascending<span class="op">=</span><span class="va">False</span> ) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -824,7 +824,7 @@ Recall = \\frac{TP}{TP + FN}\]</span></p>
 </section>
 <section id="visual-comparison-of-model-performance" class="level1">
 <h1>Visual comparison of model performance</h1>
-<div id="67a3b06e" class="cell" data-execution_count="14">
+<div id="2850bc33" class="cell" data-execution_count="14">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -855,7 +855,7 @@ Recall = \\frac{TP}{TP + FN}\]</span></p>
 <p>The model can now be selected based on its cross-validation results.</p>
 <p>Because the main concern is correctly identifying poisonous mushrooms, recall should receive particular attention.</p>
 <p>The following code identifies the model with the highest mean recall:</p>
-<div id="da3be7d0" class="cell" data-execution_count="15">
+<div id="f3845756" class="cell" data-execution_count="15">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>best_model_name <span class="op">=</span> (cv_results     .sort_values(         by<span class="op">=</span>[<span class="st">"Recall"</span>, <span class="st">"Precision"</span>, <span class="st">"Accuracy"</span>],         ascending<span class="op">=</span><span class="va">False</span>     )     .iloc[<span class="dv">0</span>][<span class="st">"Model"</span>] )  </span>
@@ -866,7 +866,7 @@ Recall = \\frac{TP}{TP + FN}\]</span></p>
 </div>
 </div>
 <p>The corresponding model is then selected:</p>
-<div id="baaa1132" class="cell" data-execution_count="16">
+<div id="cb74ace8" class="cell" data-execution_count="16">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>best_model <span class="op">=</span> models[best_model_name]</span>
@@ -888,7 +888,7 @@ Recall = \\frac{TP}{TP + FN}\]</span></p>
 <li><p>minimum number of observations required to split a node.</p></li>
 </ul>
 <p>The same approach can be applied to the other algorithms.</p>
-<div id="bcbdde94" class="cell" data-execution_count="17">
+<div id="f832251d" class="cell" data-execution_count="17">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> GridSearchCV  </span>
@@ -902,7 +902,7 @@ Recall = \\frac{TP}{TP + FN}\]</span></p>
 </details>
 </div>
 <p>We use cross-validation again during hyperparameter optimization.</p>
-<div id="1937147a" class="cell" data-execution_count="18">
+<div id="78e29bc1" class="cell" data-execution_count="18">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>grid_search <span class="op">=</span> GridSearchCV(     estimator<span class="op">=</span>best_model,     param_grid<span class="op">=</span>param_grid,     scoring<span class="op">=</span><span class="st">"recall"</span>,     cv<span class="op">=</span>cv,     n_jobs<span class="op">=-</span><span class="dv">1</span> )  </span>
@@ -2638,7 +2638,7 @@ available in the ``cv_results_`` dict at the keys ending with that<br>
 scorer's name (``'_&lt;scorer_name&gt;'``) instead of ``'_score'`` shown<br>
 above. ('split0_test_precision', 'mean_train_precision' etc.)</span></a></td>
 <td class="fitted-att-type">dict</td>
-<td>{'me...me': array([0.2871... 0.58728957]), 'me...me': array([0.0025... 0.0012095 ]), 'me...re': array([nan, n...an, nan, nan]), 'pa..._C': masked_array(...l_value=1e+20), ...}</td>
+<td>{'me...me': array([0.2853... 0.71682673]), 'me...me': array([0.0026... 0.00131836]), 'me...re': array([nan, n...an, nan, nan]), 'pa..._C': masked_array(...l_value=1e+20), ...}</td>
 </tr>
 <tr class="default even">
 <td class="param"><a href="https://scikit-learn.org/1.9/modules/generated/sklearn.model_selection.GridSearchCV.html#:~:text=feature_names_in_,-ndarray%20of%20shape%20%28n_features_in_%2C%29" class="param-doc-link" style="anchor-name: --doc-link-feature_names_in_;" rel="noreferrer" target="_blank">feature_names_in_ <span class="param-doc-description" style="position-anchor: --doc-link-feature_names_in_;"> feature_names_in_: ndarray of shape (`n_features_in_`,)<br>
@@ -2687,7 +2687,7 @@ This is present only if ``refit`` is not False.<br>
 <br>
 .. versionadded:: 0.20</span></a></td>
 <td class="fitted-att-type">float</td>
-<td>0.1811</td>
+<td>0.2221</td>
 </tr>
 <tr class="default odd">
 <td class="param"><a href="https://scikit-learn.org/1.9/modules/generated/sklearn.model_selection.GridSearchCV.html#:~:text=scorer_,-function%20or%20a%20dict" class="param-doc-link" style="anchor-name: --doc-link-scorer_;" rel="noreferrer" target="_blank">scorer_ <span class="param-doc-description" style="position-anchor: --doc-link-scorer_;"> scorer_: function or a dict<br>
@@ -3824,7 +3824,7 @@ forceTheme('sk-container-id-1');</script>
 </div>
 </div>
 <p>The best parameters are:</p>
-<div id="bd3182ef" class="cell" data-execution_count="19">
+<div id="cf0020a6" class="cell" data-execution_count="19">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Best parameters:"</span>) </span>
@@ -3841,7 +3841,7 @@ nan</code></pre>
 </div>
 </div>
 <p>The optimized model is:</p>
-<div id="89df6dc3" class="cell" data-execution_count="20">
+<div id="ff3fe44f" class="cell" data-execution_count="20">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>final_model <span class="op">=</span> grid_search.best_estimator_ </span>
@@ -3857,7 +3857,7 @@ nan</code></pre>
 <h1>Final evaluation on the test set</h1>
 <p>The test set has not been used during model selection or hyperparameter optimization.</p>
 <p>It can therefore now be used for the final evaluation.</p>
-<div id="9bacd138" class="cell" data-execution_count="21">
+<div id="6773ca0d" class="cell" data-execution_count="21">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> final_model.predict(X_test) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -3865,7 +3865,7 @@ nan</code></pre>
 </div>
 <section id="accuracy-1" class="level2">
 <h2 class="anchored" data-anchor-id="accuracy-1">Accuracy</h2>
-<div id="e175530e" class="cell" data-execution_count="22">
+<div id="69e8dae8" class="cell" data-execution_count="22">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>test_accuracy <span class="op">=</span> accuracy_score(     y_test,     y_pred )  </span>
@@ -3878,7 +3878,7 @@ nan</code></pre>
 </section>
 <section id="precision-1" class="level2">
 <h2 class="anchored" data-anchor-id="precision-1">Precision</h2>
-<div id="800a0578" class="cell" data-execution_count="23">
+<div id="68971b6a" class="cell" data-execution_count="23">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>test_precision <span class="op">=</span> precision_score(     y_test,     y_pred,     pos_label<span class="op">=</span><span class="st">"p"</span> )  </span>
@@ -3891,7 +3891,7 @@ nan</code></pre>
 </section>
 <section id="recall-1" class="level2">
 <h2 class="anchored" data-anchor-id="recall-1">Recall</h2>
-<div id="6f5e1828" class="cell" data-execution_count="24">
+<div id="b9457c44" class="cell" data-execution_count="24">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>test_recall <span class="op">=</span> recall_score(     y_test,     y_pred,     pos_label<span class="op">=</span><span class="st">"p"</span> )  </span>
@@ -3902,7 +3902,7 @@ nan</code></pre>
 </div>
 </div>
 <p>We can display all metrics together:</p>
-<div id="3a231aec" class="cell" data-execution_count="25">
+<div id="a69e5ec2" class="cell" data-execution_count="25">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>final_metrics <span class="op">=</span> pd.DataFrame({     <span class="st">"Metric"</span>: [         <span class="st">"Accuracy"</span>,         <span class="st">"Precision"</span>,         <span class="st">"Recall"</span>     ],     <span class="st">"Score"</span>: [         test_accuracy,         test_precision,         test_recall     ] })  </span>
@@ -3947,7 +3947,7 @@ nan</code></pre>
 <section id="confusion-matrix-1" class="level1">
 <h1>Confusion matrix</h1>
 <p>The confusion matrix allows us to examine the types of errors made by the final model.</p>
-<div id="6dcf61af" class="cell" data-execution_count="26">
+<div id="fd5caefb" class="cell" data-execution_count="26">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> confusion_matrix, ConfusionMatrixDisplay </span>
@@ -3979,7 +3979,7 @@ nan</code></pre>
 <section id="classification-report" class="level1">
 <h1>Classification report</h1>
 <p>A classification report provides several evaluation metrics for both classes.</p>
-<div id="384965d2" class="cell" data-execution_count="27">
+<div id="56139d6c" class="cell" data-execution_count="27">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> classification_report  </span>
@@ -4006,7 +4006,7 @@ weighted avg       1.00      1.00      1.00      1625
 <p>For a real-world application, an additional external dataset would provide an even stronger test of generalization.</p>
 <p>The new data must have the same predictor variables as the training data.</p>
 <p>For example:</p>
-<div id="48fb0895" class="cell" data-execution_count="28">
+<div id="1e68e8d9" class="cell" data-execution_count="28">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example structure of completely new observations  </span></span>
@@ -4125,7 +4125,7 @@ weighted avg       1.00      1.00      1.00      1625
 </div>
 </div>
 <p>The trained model can then make predictions:</p>
-<div id="bd571996" class="cell" data-execution_count="29">
+<div id="bf9f3e6f" class="cell" data-execution_count="29">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>new_predictions <span class="op">=</span> final_model.predict(new_data)  </span>
@@ -4136,7 +4136,7 @@ weighted avg       1.00      1.00      1.00      1625
 </div>
 </div>
 <p>The predictions can be converted into meaningful class labels:</p>
-<div id="bf99f624" class="cell" data-execution_count="30">
+<div id="220b3be9" class="cell" data-execution_count="30">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>prediction_labels <span class="op">=</span> pd.Series(     new_predictions ).<span class="bu">map</span>({     <span class="st">"e"</span>: <span class="st">"Edible"</span>,     <span class="st">"p"</span>: <span class="st">"Poisonous"</span> })  </span>
@@ -4157,7 +4157,7 @@ dtype: object</code></pre>
 <h2 class="anchored" data-anchor-id="class-balance">1. Class balance</h2>
 <p>The distribution of the two target classes should be examined.</p>
 <p>If one class is substantially more common than the other, accuracy can become misleading.</p>
-<div id="86162592" class="cell" data-execution_count="31">
+<div id="81bc3343" class="cell" data-execution_count="31">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>y_train.value_counts(normalize<span class="op">=</span><span class="va">True</span>).mul(<span class="dv">100</span>).<span class="bu">round</span>(<span class="dv">2</span>) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
