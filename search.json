@@ -1,15 +1,5 @@
 [
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Machine Learning Process: Mushroom Edibility Classification",
-    "section": "",
-    "text": "What is this template?\nThis template is a Quarto Website customized for the AIML4OS project, designed to be used with .\n\n\nHow to use it?\nSee this tutorial.\n\n\n\n\nReuseCC-BY 4.0",
-    "crumbs": [
-      "Introduction"
-    ]
-  },
-  {
     "objectID": "chapters/chapter1.html",
     "href": "chapters/chapter1.html",
     "title": "Explanatory Data Analysis (EDA)",
@@ -77,6 +67,166 @@
     "text": "Relationship between odor and the target variable\n\nPrincipal Component Analysis\nPrincipal Component Analysis (PCA) is used here to visualize the overall structure of the Mushroom dataset in a two-dimensional space. Since all explanatory variables are categorical, they are first transformed using one-hot encoding.\nThe first two principal components are then used to project the 8,124 observations onto a two-dimensional plane. Each point represents one mushroom, while the colour indicates whether the mushroom is edible or poisonous.\nThe ellipses indicate the approximate spread of observations within each class. They help assess whether the two classes occupy clearly separated regions of the feature space.\nThe percentage shown on each axis represents the proportion of variance explained by the corresponding principal component. The combined percentage indicates how much of the variation in the encoded dataset is represented by the two-dimensional PCA projection.\nA visible separation between the two classes would suggest that the categorical characteristics contain a substantial amount of information related to the target variable.\n\n\nCode\nfrom sklearn.preprocessing import OneHotEncoder\nfrom sklearn.decomposition import PCA\nimport pandas as pd\nimport matplotlib.pyplot as plt\nfrom matplotlib.patches import Ellipse\nimport numpy as np\n\n# Separate predictors and target\nX = df.drop(columns=\"poisonous\")\ny = df[\"poisonous\"]\n\n# Treat '?' as a missing-value code\nX = X.replace(\"?\", pd.NA)\n\n# One-hot encoding of categorical variables\nencoder = OneHotEncoder(\n    handle_unknown=\"ignore\",\n    sparse_output=False\n)\n\nX_encoded = encoder.fit_transform(X)\n\n# PCA\npca = PCA(n_components=2)\nX_pca = pca.fit_transform(X_encoded)\n\npca_df = pd.DataFrame(\n    X_pca,\n    columns=[\"PC1\", \"PC2\"]\n)\n\npca_df[\"Class\"] = y.map({\n    \"e\": \"Edible\",\n    \"p\": \"Poisonous\"\n})\n\nexplained_pc1 = pca.explained_variance_ratio_[0]\nexplained_pc2 = pca.explained_variance_ratio_[1]\nexplained_total = explained_pc1 + explained_pc2\n\n\n# Function for confidence ellipse\ndef add_confidence_ellipse(ax, x, y, n_std=2):\n    covariance = np.cov(x, y)\n    eigenvalues, eigenvectors = np.linalg.eigh(covariance)\n\n    order = eigenvalues.argsort()[::-1]\n    eigenvalues = eigenvalues[order]\n    eigenvectors = eigenvectors[:, order]\n\n    angle = np.degrees(\n        np.arctan2(\n            eigenvectors[1, 0],\n            eigenvectors[0, 0]\n        )\n    )\n\n    width, height = 2 * n_std * np.sqrt(eigenvalues)\n\n    ellipse = Ellipse(\n        xy=(np.mean(x), np.mean(y)),\n        width=width,\n        height=height,\n        angle=angle,\n        fill=False,\n        linewidth=2\n    )\n\n    ax.add_patch(ellipse)\n\n\n# Create figure\nfig, ax = plt.subplots(figsize=(11, 7))\n\n# Plot both classes\nfor class_name in [\"Edible\", \"Poisonous\"]:\n\n    subset = pca_df[pca_df[\"Class\"] == class_name]\n\n    ax.scatter(\n        subset[\"PC1\"],\n        subset[\"PC2\"],\n        s=18,\n        alpha=0.25,\n        label=class_name\n    )\n\n    add_confidence_ellipse(\n        ax,\n        subset[\"PC1\"].values,\n        subset[\"PC2\"].values,\n        n_std=2\n    )\n\n\n# Labels\nax.set_xlabel(\n    f\"PC1 — {explained_pc1:.1%} of variance\",\n    fontsize=11\n)\n\nax.set_ylabel(\n    f\"PC2 — {explained_pc2:.1%} of variance\",\n    fontsize=11\n)\n\nax.set_title(\n    \"PCA Projection of the Mushroom Dataset\",\n    fontsize=15,\n    pad=15\n)\n\nax.legend(\n    title=\"Mushroom class\",\n    frameon=False\n)\n\nax.grid(\n    alpha=0.15,\n    linestyle=\"--\"\n)\n\n# Remove unnecessary borders\nax.spines[\"top\"].set_visible(False)\nax.spines[\"right\"].set_visible(False)\n\n# Annotation\nax.text(\n    0.02,\n    0.02,\n    f\"PC1 + PC2 explain {explained_total:.1%} of total variance\",\n    transform=ax.transAxes,\n    fontsize=10\n)\n\nplt.tight_layout()\nplt.show()",
     "crumbs": [
       "Exploratory Data Analysis (EDA)"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Machine Learning Process: Mushroom Edibility Classification",
+    "section": "",
+    "text": "What is this template?\nThis template is a Quarto Website customized for the AIML4OS project, designed to be used with .\n\n\nHow to use it?\nSee this tutorial.\n\n\n\n\nReuseCC-BY 4.0",
+    "crumbs": [
+      "Introduction"
+    ]
+  },
+  {
+    "objectID": "chapters/chapter2.html",
+    "href": "chapters/chapter2.html",
+    "title": "Defining The Problem",
+    "section": "",
+    "text": "The aim of this analysis is to build a classification model that predicts whether a mushroom is edible or poisonous based on its characteristics.\nThe target variable is:\n\ne — edible\np — poisonous\n\nThis is a binary classification problem, because the target variable contains two possible classes.\nThe main objective is not only to achieve a high overall classification accuracy, but also to make sure that poisonous mushrooms are correctly identified.\n\nImportant: This dataset is used for demonstrating machine learning methods. A model trained on this dataset should not be used to determine whether a real mushroom is safe to eat.",
+    "crumbs": [
+      "ML process step by step"
+    ]
+  },
+  {
+    "objectID": "chapters/chapter2.html#check-the-target-variable",
+    "href": "chapters/chapter2.html#check-the-target-variable",
+    "title": "Defining The Problem",
+    "section": "Check the target variable",
+    "text": "Check the target variable\n\n\nCode\ndf[\"poisonous\"].value_counts() \n\n\npoisonous\ne    4208\np    3916\nName: count, dtype: int64\n\n\nWe can also calculate the percentage of each class.\n\n\nCode\ndf[\"poisonous\"].value_counts(normalize=True).mul(100).round(2) \n\n\npoisonous\ne    51.8\np    48.2\nName: proportion, dtype: float64\n\n\nThe two classes are relatively balanced. Therefore, accuracy can provide useful information, but it should not be considered the only evaluation metric.",
+    "crumbs": [
+      "ML process step by step"
+    ]
+  },
+  {
+    "objectID": "chapters/chapter2.html#decision-tree",
+    "href": "chapters/chapter2.html#decision-tree",
+    "title": "Defining The Problem",
+    "section": "Decision Tree",
+    "text": "Decision Tree\nA decision tree creates a sequence of rules that divide the observations into groups.\nFor example, the model may learn that a particular combination of mushroom characteristics is strongly associated with the poisonous class.\nDecision trees are also relatively easy to interpret.\n\n\nCode\nfrom sklearn.tree import DecisionTreeClassifier  \ndecision_tree = Pipeline([     (\"encoder\", OneHotEncoder(         handle_unknown=\"ignore\",         sparse_output=True     )),     (\"model\", DecisionTreeClassifier(         random_state=42     )) ])",
+    "crumbs": [
+      "ML process step by step"
+    ]
+  },
+  {
+    "objectID": "chapters/chapter2.html#random-forest",
+    "href": "chapters/chapter2.html#random-forest",
+    "title": "Defining The Problem",
+    "section": "Random Forest",
+    "text": "Random Forest\nRandom Forest is an ensemble method based on multiple decision trees.\nEach tree is trained using a different sample of the data and a different subset of variables. The final prediction is obtained by combining the predictions of the individual trees.\n\n\nCode\nfrom sklearn.ensemble import RandomForestClassifier  \nrandom_forest = Pipeline([     (\"encoder\", OneHotEncoder(         handle_unknown=\"ignore\",         sparse_output=True     )),     (\"model\", RandomForestClassifier(         n_estimators=200,         random_state=42,         n_jobs=-1     )) ])",
+    "crumbs": [
+      "ML process step by step"
+    ]
+  },
+  {
+    "objectID": "chapters/chapter2.html#support-vector-machine",
+    "href": "chapters/chapter2.html#support-vector-machine",
+    "title": "Defining The Problem",
+    "section": "Support Vector Machine",
+    "text": "Support Vector Machine\nSupport Vector Machine (SVM) attempts to find a decision boundary that separates the classes.\nSVM can be effective when the classes are separated by complex relationships between the input variables.\n\n\nCode\nfrom sklearn.svm import SVC  \nsvm = Pipeline([     (\"encoder\", OneHotEncoder(         handle_unknown=\"ignore\",         sparse_output=True     )),     (\"model\", SVC(         random_state=42     )) ])",
+    "crumbs": [
+      "ML process step by step"
+    ]
+  },
+  {
+    "objectID": "chapters/chapter2.html#accuracy-1",
+    "href": "chapters/chapter2.html#accuracy-1",
+    "title": "Defining The Problem",
+    "section": "Accuracy",
+    "text": "Accuracy\n\n\nCode\ntest_accuracy = accuracy_score(     y_test,     y_pred )  \nprint(f\"Accuracy: {test_accuracy:.4f}\") \n\n\nAccuracy: 0.9988",
+    "crumbs": [
+      "ML process step by step"
+    ]
+  },
+  {
+    "objectID": "chapters/chapter2.html#precision-1",
+    "href": "chapters/chapter2.html#precision-1",
+    "title": "Defining The Problem",
+    "section": "Precision",
+    "text": "Precision\n\n\nCode\ntest_precision = precision_score(     y_test,     y_pred,     pos_label=\"p\" )  \nprint(f\"Precision: {test_precision:.4f}\") \n\n\nPrecision: 1.0000",
+    "crumbs": [
+      "ML process step by step"
+    ]
+  },
+  {
+    "objectID": "chapters/chapter2.html#recall-1",
+    "href": "chapters/chapter2.html#recall-1",
+    "title": "Defining The Problem",
+    "section": "Recall",
+    "text": "Recall\n\n\nCode\ntest_recall = recall_score(     y_test,     y_pred,     pos_label=\"p\" )  \nprint(f\"Recall: {test_recall:.4f}\") \n\n\nRecall: 0.9974\n\n\nWe can display all metrics together:\n\n\nCode\nfinal_metrics = pd.DataFrame({     \"Metric\": [         \"Accuracy\",         \"Precision\",         \"Recall\"     ],     \"Score\": [         test_accuracy,         test_precision,         test_recall     ] })  \nfinal_metrics \n\n\n\n\n\n\n\n\n\nMetric\nScore\n\n\n\n\n0\nAccuracy\n0.998769\n\n\n1\nPrecision\n1.000000\n\n\n2\nRecall\n0.997446",
+    "crumbs": [
+      "ML process step by step"
+    ]
+  },
+  {
+    "objectID": "chapters/chapter2.html#class-balance",
+    "href": "chapters/chapter2.html#class-balance",
+    "title": "Defining The Problem",
+    "section": "1. Class balance",
+    "text": "1. Class balance\nThe distribution of the two target classes should be examined.\nIf one class is substantially more common than the other, accuracy can become misleading.\n\n\nCode\ny_train.value_counts(normalize=True).mul(100).round(2) \n\n\npoisonous\ne    51.79\np    48.21\nName: proportion, dtype: float64",
+    "crumbs": [
+      "ML process step by step"
+    ]
+  },
+  {
+    "objectID": "chapters/chapter2.html#accuracy-2",
+    "href": "chapters/chapter2.html#accuracy-2",
+    "title": "Defining The Problem",
+    "section": "2. Accuracy",
+    "text": "2. Accuracy\nAccuracy provides an overall measure of how many predictions are correct.\nHowever, it does not distinguish between different types of classification errors.",
+    "crumbs": [
+      "ML process step by step"
+    ]
+  },
+  {
+    "objectID": "chapters/chapter2.html#precision-2",
+    "href": "chapters/chapter2.html#precision-2",
+    "title": "Defining The Problem",
+    "section": "3. Precision",
+    "text": "3. Precision\nPrecision tells us how reliable the model is when it predicts that a mushroom is poisonous.\nA low precision means that the model produces more false alarms by classifying edible mushrooms as poisonous.",
+    "crumbs": [
+      "ML process step by step"
+    ]
+  },
+  {
+    "objectID": "chapters/chapter2.html#recall-2",
+    "href": "chapters/chapter2.html#recall-2",
+    "title": "Defining The Problem",
+    "section": "4. Recall",
+    "text": "4. Recall\nRecall measures how many of the actually poisonous mushrooms are correctly identified.\nFor this particular classification problem, recall for the poisonous class deserves particular attention because a false negative corresponds to a poisonous mushroom being classified as edible.",
+    "crumbs": [
+      "ML process step by step"
+    ]
+  },
+  {
+    "objectID": "chapters/chapter2.html#confusion-matrix-2",
+    "href": "chapters/chapter2.html#confusion-matrix-2",
+    "title": "Defining The Problem",
+    "section": "5. Confusion matrix",
+    "text": "5. Confusion matrix\nThe confusion matrix should be examined to understand exactly which types of errors the model makes.\nIn particular, the number of:\nFalse Negatives = poisonous mushrooms classified as edible\nshould be carefully monitored.",
+    "crumbs": [
+      "ML process step by step"
+    ]
+  },
+  {
+    "objectID": "chapters/chapter2.html#cross-validation-1",
+    "href": "chapters/chapter2.html#cross-validation-1",
+    "title": "Defining The Problem",
+    "section": "6. Cross-validation",
+    "text": "6. Cross-validation\nCross-validation provides information about how stable the model’s performance is across different subsets of the training data.\nLarge differences between folds may indicate that model performance depends strongly on the particular observations used for training.",
+    "crumbs": [
+      "ML process step by step"
+    ]
+  },
+  {
+    "objectID": "chapters/chapter2.html#generalization-to-unseen-data",
+    "href": "chapters/chapter2.html#generalization-to-unseen-data",
+    "title": "Defining The Problem",
+    "section": "7. Generalization to unseen data",
+    "text": "7. Generalization to unseen data\nThe final model should be evaluated on observations that were not used during model development.\nThe test set provides one such evaluation. Ideally, an additional independent dataset should also be used to assess how well the model generalizes to new observations.",
+    "crumbs": [
+      "ML process step by step"
     ]
   }
 ]

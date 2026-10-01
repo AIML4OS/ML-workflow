@@ -71,7 +71,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../chapters/chapter2.qmd" rel="next">
+<link href="../chapters/chapter2.html" rel="next">
 <link href="../index.html" rel="prev">
 <link href="../resources/profile/main3.png" rel="icon" type="image/png">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
@@ -172,7 +172,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/chapter2.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/chapter2.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">ML process step by step</span></a>
   </div>
 </li>
@@ -230,7 +230,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="loading-the-dataset" class="level1">
 <h1>Loading the dataset</h1>
 <p>In the first step, we load the Mushroom dataset from the <strong>UCI Machine Learning Repository</strong> using the <code>ucimlrepo</code> package.</p>
-<div id="ec670edf" class="cell" data-execution_count="1">
+<div id="5ae3fa5e" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> ucimlrepo <span class="im">import</span> fetch_ucirepo</span>
@@ -252,7 +252,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="creating-a-pandas-dataframe" class="level1">
 <h1>Creating a pandas DataFrame</h1>
 <p>For exploratory data analysis, it is convenient to combine the features and the target variable into a single pandas DataFrame.</p>
-<div id="3e8cd9e7" class="cell" data-execution_count="2">
+<div id="497ff153" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -423,7 +423,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>We can also check the basic dimensions and column names of the dataset.</p>
-<div id="b9b441bd" class="cell" data-execution_count="3">
+<div id="e92d50d4" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Dataset dimensions</span></span>
@@ -489,7 +489,7 @@ Column names:
 <section id="dataset-structure" class="level2">
 <h2 class="anchored" data-anchor-id="dataset-structure">Dataset structure</h2>
 <p>First, we inspect the general structure of the DataFrame using <code>info()</code>.</p>
-<div id="a43c345a" class="cell" data-execution_count="4">
+<div id="36ac158f" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df.info()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -541,7 +541,7 @@ memory usage: 1.4+ MB</code></pre>
 <section id="distribution-of-the-target-variable" class="level2">
 <h2 class="anchored" data-anchor-id="distribution-of-the-target-variable">Distribution of the target variable</h2>
 <p>The next step is to examine the distribution of the target variable.</p>
-<div id="3d9bd71d" class="cell" data-execution_count="5">
+<div id="eb5a9ab5" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"poisonous"</span>].value_counts()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -561,7 +561,7 @@ Name: count, dtype: int64</code></pre>
 </ul>
 <p>The classes are relatively well represented, although they are not perfectly balanced.</p>
 <p>A visual representation makes this easier to interpret.</p>
-<div id="b22c90d0" class="cell" data-execution_count="6">
+<div id="111713b9" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -589,7 +589,7 @@ Name: count, dtype: int64</code></pre>
 <section id="number-of-unique-values-in-each-variable" class="level2">
 <h2 class="anchored" data-anchor-id="number-of-unique-values-in-each-variable">Number of unique values in each variable</h2>
 <p>The next step is to determine how many unique categories are present in each variable.</p>
-<div id="b19ccc5b" class="cell" data-execution_count="7">
+<div id="74946558" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>unique_values <span class="op">=</span> pd.DataFrame({</span>
@@ -745,7 +745,7 @@ Name: count, dtype: int64</code></pre>
 <p>The target variable <code>poisonous</code> has two categories.</p>
 <p>This information is important when deciding how categorical variables should be encoded before applying machine learning algorithms.</p>
 <p>We can also visualize the number of categories for each variable.</p>
-<div id="a1399ec8" class="cell" data-execution_count="8">
+<div id="23db44a0" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>unique_values_sorted <span class="op">=</span> unique_values.sort_values(</span>
@@ -916,7 +916,7 @@ Name: count, dtype: int64</code></pre>
 <h2 class="anchored" data-anchor-id="distribution-of-individual-categorical-variables">Distribution of individual categorical variables</h2>
 <p>Since the dataset contains only categorical variables, bar charts are an appropriate way to examine the distribution of individual features.</p>
 <p>For example, we can examine the <code>odor</code> variable.</p>
-<div id="9ef63a7a" class="cell" data-execution_count="9">
+<div id="1026e8a7" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"odor"</span>].value_counts().plot(kind<span class="op">=</span><span class="st">"bar"</span>)</span>
@@ -948,7 +948,7 @@ Name: count, dtype: int64</code></pre>
 <p>The ellipses indicate the approximate spread of observations within each class. They help assess whether the two classes occupy clearly separated regions of the feature space.</p>
 <p>The percentage shown on each axis represents the proportion of variance explained by the corresponding principal component. The combined percentage indicates how much of the variation in the encoded dataset is represented by the two-dimensional PCA projection.</p>
 <p>A visible separation between the two classes would suggest that the categorical characteristics contain a substantial amount of information related to the target variable.</p>
-<div id="2b581625" class="cell" data-execution_count="10">
+<div id="77a90d2f" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> OneHotEncoder</span>
@@ -1520,7 +1520,7 @@ Name: count, dtype: int64</code></pre>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../chapters/chapter2.qmd" class="pagination-link" aria-label="ML process step by step">
+      <a href="../chapters/chapter2.html" class="pagination-link" aria-label="ML process step by step">
         <span class="nav-page-text">ML process step by step</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
