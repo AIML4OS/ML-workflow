@@ -1,5 +1,24 @@
 ---
 title: "About"
 ---
+This repository presents a step-by-step machine learning workflow for classifying mushrooms as **edible or poisonous** based on their observable characteristics.
 
-About this site
+The analysis uses the **UCI Mushroom Dataset**, which contains categorical information describing different mushroom characteristics. The repository demonstrates how these data can be prepared, explored, and used to build and evaluate classification models.
+
+The workflow covers the following stages:
+
+1. **Problem definition** – formulation of the classification problem and identification of the target variable.
+2. **Data exploration** – examination of the dataset structure, variables, categorical values, class distribution, and relationships between features.
+3. **Data preprocessing** – preparation of categorical variables and their transformation into a format suitable for machine learning algorithms.
+4. **Exploratory visualization** – including PCA to explore the structure of the dataset and the separation of the two classes.
+5. **Model development** – training several classification algorithms, including Decision Tree, Random Forest, and Support Vector Machine (SVM).
+6. **Model evaluation** – assessment using accuracy, precision, recall, and confusion matrices.
+7. **Cross-validation** – comparison of model performance using stratified 5-fold cross-validation.
+8. **Hyperparameter optimization** – tuning the selected model to improve its performance.
+9. **Final evaluation** – assessment of the final model on previously unseen test data.
+10. **Prediction on new observations** – demonstration of how the trained model can be used to classify new mushroom observations.
+
+The repository is designed as a **practical learning example**, with each stage explained and implemented step by step. The aim is to demonstrate a complete machine learning workflow, from defining a classification problem and preparing the data to evaluating a final model and generating predictions for new observations.
+
+> **Important:** This repository is intended for educational purposes. The resulting model should not be used to determine whether real-world mushrooms are safe to consume.
+
