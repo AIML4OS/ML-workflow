@@ -1,10 +1,8 @@
 ---
-
-title: "Explanatory Data Analysis (EDA)"
-format: html
-editor: visual
+title: "Explanatory Data Analysis (EDA)" 
+format: html 
+editor: visual 
 ---
-
 
 # Loading the dataset
 
@@ -23,8 +21,8 @@ y = mushroom.data.targets
 
 The dataset is divided into two parts:
 
-* `X` contains the predictor variables (features),
-* `y` contains the target variable, indicating whether a mushroom is edible or poisonous.
+- `X` contains the predictor variables (features),
+- `y` contains the target variable, indicating whether a mushroom is edible or poisonous.
 
 # Creating a pandas DataFrame
 
@@ -61,26 +59,26 @@ Each observation represents a mushroom described using a set of categorical phys
 
 The dataset contains:
 
-* **8,124 observations**,
-* **22 explanatory variables**,
-* **1 target variable**,
-* exclusively categorical variables.
+- **8,124 observations**,
+- **22 explanatory variables**,
+- **1 target variable**,
+- exclusively categorical variables.
 
 The target variable, `poisonous`, indicates whether a mushroom is:
 
-* `e` – edible,
-* `p` – poisonous.
+- `e` – edible,
+- `p` – poisonous.
 
 Therefore, the dataset can be treated as a **binary classification problem**.
 
 The fact that all explanatory variables are categorical makes this dataset particularly useful for demonstrating:
 
-* exploratory data analysis,
-* categorical data preprocessing,
-* categorical encoding,
-* feature selection,
-* classification algorithms,
-* model evaluation.
+- exploratory data analysis,
+- categorical data preprocessing,
+- categorical encoding,
+- feature selection,
+- classification algorithms,
+- model evaluation.
 
 **Source:** [UCI Machine Learning Repository – Mushroom Dataset](https://archive.ics.uci.edu/dataset/73/mushroom)
 
@@ -94,13 +92,13 @@ Before building a machine learning model, it is useful to perform **Exploratory 
 
 The purpose of EDA is to understand:
 
-* the structure of the dataset,
-* the types of variables,
-* the presence of missing values,
-* the distribution of the target variable,
-* the number of categories in each variable,
-* the distribution of individual categories,
-* and potential relationships between explanatory variables and the target.
+- the structure of the dataset,
+- the types of variables,
+- the presence of missing values,
+- the distribution of the target variable,
+- the number of categories in each variable,
+- the distribution of individual categories,
+- and potential relationships between explanatory variables and the target.
 
 This information helps us understand the data before applying machine learning methods.
 
@@ -114,11 +112,11 @@ df.info()
 
 This allows us to check:
 
-* the number of observations,
-* the number of variables,
-* column names,
-* data types,
-* and the number of non-null observations.
+- the number of observations,
+- the number of variables,
+- column names,
+- data types,
+- and the number of non-null observations.
 
 The variables are categorical and are represented using character codes.
 
@@ -136,8 +134,8 @@ This shows the number of observations belonging to each target class.
 
 The dataset contains two classes:
 
-* `e` – edible,
-* `p` – poisonous.
+- `e` – edible,
+- `p` – poisonous.
 
 The classes are relatively well represented, although they are not perfectly balanced.
 
@@ -177,11 +175,11 @@ This analysis shows that the variables have different numbers of categories.
 
 For example:
 
-* `bruises` has 2 categories,
-* `cap-surface` has 4 categories,
-* `cap-color` has 10 categories,
-* `gill-color` has 12 categories,
-* `odor` has 9 categories.
+- `bruises` has 2 categories,
+- `cap-surface` has 4 categories,
+- `cap-color` has 10 categories,
+- `gill-color` has 12 categories,
+- `odor` has 9 categories.
 
 The target variable `poisonous` has two categories.
 
@@ -214,32 +212,31 @@ plt.show()
 
 The variables describe different physical characteristics of mushrooms.
 
-| Variable                   | Number of categories | Description                                                                                                                                                  |
-| :------------------------- | -------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `cap-shape`                |                    6 | `b` = bell, `c` = conical, `x` = convex, `f` = flat, `k` = knobbed, `s` = sunken                                                                             |
-| `cap-surface`              |                    4 | `f` = fibrous, `g` = grooves, `y` = scaly, `s` = smooth                                                                                                      |
-| `cap-color`                |                   10 | `n` = brown, `b` = buff, `c` = cinnamon, `g` = gray, `r` = green, `p` = pink, `u` = purple, `e` = red, `w` = white, `y` = yellow                             |
-| `bruises`                  |                    2 | `t` = bruises, `f` = no bruises                                                                                                                              |
-| `odor`                     |                    9 | `a` = almond, `l` = anise, `c` = creosote, `y` = fishy, `f` = foul, `m` = musty, `n` = none, `p` = pungent, `s` = spicy                                      |
-| `gill-attachment`          |           2 observed | `a` = attached, `d` = descending, `f` = free, `n` = notched                                                                                                  |
-| `gill-spacing`             |           2 observed | `c` = close, `w` = crowded, `d` = distant                                                                                                                    |
-| `gill-size`                |                    2 | `b` = broad, `n` = narrow                                                                                                                                    |
-| `gill-color`               |                   12 | `k` = black, `n` = brown, `b` = buff, `h` = chocolate, `g` = gray, `r` = green, `o` = orange, `p` = pink, `u` = purple, `e` = red, `w` = white, `y` = yellow |
-| `stalk-shape`              |                    2 | `e` = enlarging, `t` = tapering                                                                                                                              |
-| `stalk-root`               |           4 observed | `b` = bulbous, `c` = club, `e` = equal, `?` = missing                                                                                                        |
-| `stalk-surface-above-ring` |                    4 | `f` = fibrous, `y` = scaly, `k` = silky, `s` = smooth                                                                                                        |
-| `stalk-surface-below-ring` |                    4 | `f` = fibrous, `y` = scaly, `k` = silky, `s` = smooth                                                                                                        |
-| `stalk-color-above-ring`   |                    9 | `n` = brown, `b` = buff, `c` = cinnamon, `g` = gray, `o` = orange, `p` = pink, `e` = red, `w` = white, `y` = yellow                                          |
-| `stalk-color-below-ring`   |                    9 | `n` = brown, `b` = buff, `c` = cinnamon, `g` = gray, `o` = orange, `p` = pink, `e` = red, `w` = white, `y` = yellow                                          |
-| `veil-type`                |                    1 | `p` = partial                                                                                                                                                |
-| `veil-color`               |                    4 | `n` = brown, `o` = orange, `w` = white, `y` = yellow                                                                                                         |
-| `ring-number`              |                    3 | `n` = none, `o` = one, `t` = two                                                                                                                             |
-| `ring-type`                |           5 observed | `e` = evanescent, `f` = flaring, `l` = large, `n` = none, `p` = pendant                                                                                      |
-| `spore-print-color`        |                    9 | `k` = black, `n` = brown, `b` = buff, `h` = chocolate, `r` = green, `o` = orange, `u` = purple, `w` = white, `y` = yellow                                    |
-| `population`               |                    6 | `a` = abundant, `c` = clustered, `n` = numerous, `s` = scattered, `v` = several, `y` = solitary                                                              |
-| `habitat`                  |                    7 | `g` = grasses, `l` = leaves, `m` = meadows, `p` = paths, `u` = urban, `w` = waste, `d` = woods                                                               |
-| `poisonous`                |                    2 | `e` = edible, `p` = poisonous                                                                                                                                |
-
+| Variable | Number of categories | Description |
+|:-----------|-----------:|:-----------------------------------------------|
+| `cap-shape` | 6 | `b` = bell, `c` = conical, `x` = convex, `f` = flat, `k` = knobbed, `s` = sunken |
+| `cap-surface` | 4 | `f` = fibrous, `g` = grooves, `y` = scaly, `s` = smooth |
+| `cap-color` | 10 | `n` = brown, `b` = buff, `c` = cinnamon, `g` = gray, `r` = green, `p` = pink, `u` = purple, `e` = red, `w` = white, `y` = yellow |
+| `bruises` | 2 | `t` = bruises, `f` = no bruises |
+| `odor` | 9 | `a` = almond, `l` = anise, `c` = creosote, `y` = fishy, `f` = foul, `m` = musty, `n` = none, `p` = pungent, `s` = spicy |
+| `gill-attachment` | 2 observed | `a` = attached, `d` = descending, `f` = free, `n` = notched |
+| `gill-spacing` | 2 observed | `c` = close, `w` = crowded, `d` = distant |
+| `gill-size` | 2 | `b` = broad, `n` = narrow |
+| `gill-color` | 12 | `k` = black, `n` = brown, `b` = buff, `h` = chocolate, `g` = gray, `r` = green, `o` = orange, `p` = pink, `u` = purple, `e` = red, `w` = white, `y` = yellow |
+| `stalk-shape` | 2 | `e` = enlarging, `t` = tapering |
+| `stalk-root` | 4 observed | `b` = bulbous, `c` = club, `e` = equal, `?` = missing |
+| `stalk-surface-above-ring` | 4 | `f` = fibrous, `y` = scaly, `k` = silky, `s` = smooth |
+| `stalk-surface-below-ring` | 4 | `f` = fibrous, `y` = scaly, `k` = silky, `s` = smooth |
+| `stalk-color-above-ring` | 9 | `n` = brown, `b` = buff, `c` = cinnamon, `g` = gray, `o` = orange, `p` = pink, `e` = red, `w` = white, `y` = yellow |
+| `stalk-color-below-ring` | 9 | `n` = brown, `b` = buff, `c` = cinnamon, `g` = gray, `o` = orange, `p` = pink, `e` = red, `w` = white, `y` = yellow |
+| `veil-type` | 1 | `p` = partial |
+| `veil-color` | 4 | `n` = brown, `o` = orange, `w` = white, `y` = yellow |
+| `ring-number` | 3 | `n` = none, `o` = one, `t` = two |
+| `ring-type` | 5 observed | `e` = evanescent, `f` = flaring, `l` = large, `n` = none, `p` = pendant |
+| `spore-print-color` | 9 | `k` = black, `n` = brown, `b` = buff, `h` = chocolate, `r` = green, `o` = orange, `u` = purple, `w` = white, `y` = yellow |
+| `population` | 6 | `a` = abundant, `c` = clustered, `n` = numerous, `s` = scattered, `v` = several, `y` = solitary |
+| `habitat` | 7 | `g` = grasses, `l` = leaves, `m` = meadows, `p` = paths, `u` = urban, `w` = waste, `d` = woods |
+| `poisonous` | 2 | `e` = edible, `p` = poisonous |
 
 The distinction between **possible categories documented for a variable** and **categories actually observed in this particular dataset** is important. For this reason, the table reports the number of observed categories for variables where not all documented categories occur in the data.
 
@@ -417,6 +414,7 @@ ax.text(
 plt.tight_layout()
 plt.show()
 ```
+
 # Summary of the exploratory analysis
 
 The EDA provides several important observations about the Mushroom dataset.

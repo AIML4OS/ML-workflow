@@ -54,7 +54,7 @@ One-hot encoding transforms these categories into binary variables.
 
 We will also treat `?` as a missing-value code. In this dataset, `?` occurs for some categorical characteristics and should not be treated as an ordinary category.
 
-```{python}         
+```{python}
 import pandas as pd
 import numpy as np  
 from ucimlrepo import fetch_ucirepo  
@@ -70,13 +70,13 @@ df.head()
 
 ## Check the target variable
 
-```{python}         
+```{python}
 df["poisonous"].value_counts() 
 ```
 
 We can also calculate the percentage of each class.
 
-```{python}         
+```{python}
 df["poisonous"].value_counts(normalize=True).mul(100).round(2) 
 ```
 
@@ -96,7 +96,7 @@ The test set is kept separate and is used only for the final evaluation.
 
 We use `stratify=y` to preserve approximately the same proportion of edible and poisonous mushrooms in both datasets.
 
-```{python}         
+```{python}
 from sklearn.model_selection import train_test_split
 X = df.drop(columns="poisonous") 
 y = df["poisonous"]  
@@ -109,7 +109,7 @@ print("Test observations:", X_test.shape[0])
 
 We can verify the class distribution in both datasets.
 
-```{python}        
+```{python}
 print("Training set:") 
 print(y_train.value_counts(normalize=True).mul(100).round(2))  
 print("\nTest set:") 
@@ -124,7 +124,7 @@ We use `OneHotEncoder` to convert them into numerical variables.
 
 The encoder is placed inside a `Pipeline`. This is important because the encoding is then fitted separately within each training fold during cross-validation.
 
-```{python}         
+```{python}
 from sklearn.preprocessing import OneHotEncoder 
 from sklearn.pipeline import Pipeline  
 encoder = OneHotEncoder(handle_unknown="ignore",     sparse_output=True ) 
@@ -150,7 +150,7 @@ For example, the model may learn that a particular combination of mushroom chara
 
 Decision trees are also relatively easy to interpret.
 
-```{python}         
+```{python}
 from sklearn.tree import DecisionTreeClassifier  
 decision_tree = Pipeline([     ("encoder", OneHotEncoder(         handle_unknown="ignore",         sparse_output=True     )),     ("model", DecisionTreeClassifier(         random_state=42     )) ]) 
 ```
@@ -161,7 +161,7 @@ Random Forest is an ensemble method based on multiple decision trees.
 
 Each tree is trained using a different sample of the data and a different subset of variables. The final prediction is obtained by combining the predictions of the individual trees.
 
-```{python}         
+```{python}
 from sklearn.ensemble import RandomForestClassifier  
 random_forest = Pipeline([     ("encoder", OneHotEncoder(         handle_unknown="ignore",         sparse_output=True     )),     ("model", RandomForestClassifier(         n_estimators=200,         random_state=42,         n_jobs=-1     )) ]) 
 ```
@@ -172,7 +172,7 @@ Support Vector Machine (SVM) attempts to find a decision boundary that separates
 
 SVM can be effective when the classes are separated by complex relationships between the input variables.
 
-```{python}         
+```{python}
 from sklearn.svm import SVC  
 svm = Pipeline([     ("encoder", OneHotEncoder(         handle_unknown="ignore",         sparse_output=True     )),     ("model", SVC(         random_state=42     )) ]) 
 ```
@@ -310,7 +310,7 @@ The model comparison should therefore consider all three metrics, with particula
 
 # Visual comparison of model performance
 
-```{python}         
+```{python}
 import matplotlib.pyplot as plt
 
 plot_data = cv_results.set_index("Model")
@@ -362,7 +362,7 @@ For example, for a Random Forest we can test:
 
 The same approach can be applied to the other algorithms.
 
-```{python}         
+```{python}
 from sklearn.model_selection import GridSearchCV  
 if best_model_name == "Random Forest":
     param_grid = {"model__n_estimators": [100, 200, 300],
@@ -375,14 +375,14 @@ else:
 
 We use cross-validation again during hyperparameter optimization.
 
-```{python}         
+```{python}
 grid_search = GridSearchCV(     estimator=best_model,     param_grid=param_grid,     scoring="recall",     cv=cv,     n_jobs=-1 )  
 grid_search.fit(X_train, y_train) 
 ```
 
 The best parameters are:
 
-```{python}         
+```{python}
 print("Best parameters:") 
 print(grid_search.best_params_)
 print("\nBest cross-validation recall:") 
@@ -391,7 +391,7 @@ print(round(grid_search.best_score_, 4))
 
 The optimized model is:
 
-```{python}         
+```{python}
 final_model = grid_search.best_estimator_ 
 print("Final model:", final_model)
 ```
@@ -402,34 +402,34 @@ The test set has not been used during model selection or hyperparameter optimiza
 
 It can therefore now be used for the final evaluation.
 
-```{python}         
+```{python}
 y_pred = final_model.predict(X_test) 
 ```
 
 ## Accuracy
 
-```{python}         
+```{python}
 test_accuracy = accuracy_score(     y_test,     y_pred )  
 print(f"Accuracy: {test_accuracy:.4f}") 
 ```
 
 ## Precision
 
-```{python}         
+```{python}
 test_precision = precision_score(     y_test,     y_pred,     pos_label="p" )  
 print(f"Precision: {test_precision:.4f}") 
 ```
 
 ## Recall
 
-```{python}         
+```{python}
 test_recall = recall_score(     y_test,     y_pred,     pos_label="p" )  
 print(f"Recall: {test_recall:.4f}") 
 ```
 
 We can display all metrics together:
 
-```{python}         
+```{python}
 final_metrics = pd.DataFrame({     "Metric": [         "Accuracy",         "Precision",         "Recall"     ],     "Score": [         test_accuracy,         test_precision,         test_recall     ] })  
 final_metrics 
 ```
@@ -438,7 +438,7 @@ final_metrics
 
 The confusion matrix allows us to examine the types of errors made by the final model.
 
-```{python}         
+```{python}
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay 
 cm = confusion_matrix(     y_test,     y_pred,     labels=["e", "p"] )  
 disp = ConfusionMatrixDisplay(     confusion_matrix=cm,     display_labels=["Edible", "Poisonous"] )  
@@ -465,7 +465,7 @@ The **false negative** count is particularly important in this application becau
 
 A classification report provides several evaluation metrics for both classes.
 
-```{python}          
+```{python}
 from sklearn.metrics import classification_report  
 print(     classification_report(         y_test,         y_pred,         target_names=["Edible", "Poisonous"]     ) ) 
 ```
@@ -484,7 +484,7 @@ The new data must have the same predictor variables as the training data.
 
 For example:
 
-```{python}         
+```{python}
 # Example structure of completely new observations  
 new_data = pd.DataFrame({
     "cap-shape": ["x", "f"],
@@ -516,14 +516,14 @@ new_data
 
 The trained model can then make predictions:
 
-```{python}         
+```{python}
 new_predictions = final_model.predict(new_data)  
 new_predictions 
 ```
 
 The predictions can be converted into meaningful class labels:
 
-```{python}         
+```{python}
 prediction_labels = pd.Series(     new_predictions ).map({     "e": "Edible",     "p": "Poisonous" })  
 prediction_labels 
 ```
@@ -540,7 +540,7 @@ The distribution of the two target classes should be examined.
 
 If one class is substantially more common than the other, accuracy can become misleading.
 
-```{python}         
+```{python}
 y_train.value_counts(normalize=True).mul(100).round(2) 
 ```
 
