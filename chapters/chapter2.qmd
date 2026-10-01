@@ -1,0 +1,621 @@
+---
+title: "Defining The Problem"
+format: html
+editor: visual
+---
+
+# Classification problem
+
+The aim of this analysis is to build a classification model that predicts whether a mushroom is **edible** or **poisonous** based on its characteristics.
+
+The target variable is:
+
+- `e` — edible
+
+- `p` — poisonous
+
+This is a **binary classification problem**, because the target variable contains two possible classes.
+
+The main objective is not only to achieve a high overall classification accuracy, but also to make sure that poisonous mushrooms are correctly identified.
+
+> **Important:** This dataset is used for demonstrating machine learning methods. A model trained on this dataset should not be used to determine whether a real mushroom is safe to eat.
+
+# Type of machine learning
+
+This is a **supervised learning** problem.
+
+We have:
+
+- input variables describing the characteristics of mushrooms,
+
+- a target variable indicating whether each mushroom is edible or poisonous.
+
+The target variable is known for the observations in the training data, which allows the algorithm to learn the relationship between mushroom characteristics and the target class.
+
+# Preparing the data
+
+The Mushroom Dataset contains categorical variables. Most machine learning algorithms require numerical input, so the categorical variables need to be transformed into a numerical representation.
+
+We will use **one-hot encoding**.
+
+For example, a variable such as `cap-color` can contain categories such as:
+
+- brown,
+
+- gray,
+
+- red,
+
+- white,
+
+- yellow.
+
+One-hot encoding transforms these categories into binary variables.
+
+We will also treat `?` as a missing-value code. In this dataset, `?` occurs for some categorical characteristics and should not be treated as an ordinary category.
+
+```{python}         
+import pandas as pd
+import numpy as np  
+from ucimlrepo import fetch_ucirepo  
+ # Load the dataset 
+mushroom = fetch_ucirepo(id=73)
+X = mushroom.data.features
+y = mushroom.data.targets
+# Combine predictors and target 
+df = pd.concat([X, y], axis=1) 
+ # Display the first observations 
+df.head() 
+```
+
+## Check the target variable
+
+```{python}         
+df["poisonous"].value_counts() 
+```
+
+We can also calculate the percentage of each class.
+
+```{python}         
+df["poisonous"].value_counts(normalize=True).mul(100).round(2) 
+```
+
+The two classes are relatively balanced. Therefore, accuracy can provide useful information, but it should not be considered the only evaluation metric.
+
+# Train-test split
+
+Before training the models, the dataset is divided into two parts:
+
+- **training set — 80%**
+
+- **test set — 20%**
+
+The training set is used to train and compare the models.
+
+The test set is kept separate and is used only for the final evaluation.
+
+We use `stratify=y` to preserve approximately the same proportion of edible and poisonous mushrooms in both datasets.
+
+```{python}         
+from sklearn.model_selection import train_test_split
+X = df.drop(columns="poisonous") 
+y = df["poisonous"]  
+# Treat '?' as a missing-value code 
+X = X.replace("?", pd.NA)  
+X_train, X_test, y_train, y_test = train_test_split(X,y,test_size=0.20,     random_state=42,stratify=y)
+print("Training observations:", X_train.shape[0])
+print("Test observations:", X_test.shape[0]) 
+```
+
+We can verify the class distribution in both datasets.
+
+```{python}        
+print("Training set:") 
+print(y_train.value_counts(normalize=True).mul(100).round(2))  
+print("\nTest set:") 
+print(y_test.value_counts(normalize=True).mul(100).round(2)) 
+```
+
+# Building the preprocessing pipeline
+
+All explanatory variables are categorical.
+
+We use `OneHotEncoder` to convert them into numerical variables.
+
+The encoder is placed inside a `Pipeline`. This is important because the encoding is then fitted separately within each training fold during cross-validation.
+
+```{python}         
+from sklearn.preprocessing import OneHotEncoder 
+from sklearn.pipeline import Pipeline  
+encoder = OneHotEncoder(handle_unknown="ignore",     sparse_output=True ) 
+```
+
+# Classification models
+
+We will compare three classification algorithms:
+
+1.  **Decision Tree**
+
+2.  **Random Forest**
+
+3.  **Support Vector Machine (SVM)**
+
+These models represent different approaches to classification.
+
+## Decision Tree
+
+A decision tree creates a sequence of rules that divide the observations into groups.
+
+For example, the model may learn that a particular combination of mushroom characteristics is strongly associated with the poisonous class.
+
+Decision trees are also relatively easy to interpret.
+
+```{python}         
+from sklearn.tree import DecisionTreeClassifier  
+decision_tree = Pipeline([     ("encoder", OneHotEncoder(         handle_unknown="ignore",         sparse_output=True     )),     ("model", DecisionTreeClassifier(         random_state=42     )) ]) 
+```
+
+## Random Forest
+
+Random Forest is an ensemble method based on multiple decision trees.
+
+Each tree is trained using a different sample of the data and a different subset of variables. The final prediction is obtained by combining the predictions of the individual trees.
+
+```{python}         
+from sklearn.ensemble import RandomForestClassifier  
+random_forest = Pipeline([     ("encoder", OneHotEncoder(         handle_unknown="ignore",         sparse_output=True     )),     ("model", RandomForestClassifier(         n_estimators=200,         random_state=42,         n_jobs=-1     )) ]) 
+```
+
+## Support Vector Machine
+
+Support Vector Machine (SVM) attempts to find a decision boundary that separates the classes.
+
+SVM can be effective when the classes are separated by complex relationships between the input variables.
+
+```{python}         
+from sklearn.svm import SVC  
+svm = Pipeline([     ("encoder", OneHotEncoder(         handle_unknown="ignore",         sparse_output=True     )),     ("model", SVC(         random_state=42     )) ]) 
+```
+
+# Model evaluation
+
+Several metrics can be used to evaluate a classification model.
+
+For this problem, we will focus on:
+
+- Accuracy
+
+- Precision
+
+- Recall
+
+- Confusion matrix
+
+We will treat **poisonous mushrooms (`p`) as the positive class**.
+
+This is important because the interpretation of precision and recall depends on which class is defined as positive.
+
+# Accuracy
+
+**Accuracy** measures the proportion of all predictions that were correct.
+
+$$Accuracy = \\frac{TP + TN}{TP + TN + FP + FN}$$
+
+where:
+
+- `TP` = poisonous mushrooms correctly classified as poisonous,
+
+- `TN` = edible mushrooms correctly classified as edible,
+
+- `FP` = edible mushrooms incorrectly classified as poisonous,
+
+- `FN` = poisonous mushrooms incorrectly classified as edible.
+
+In this problem, high accuracy means that the model correctly classifies a large proportion of both edible and poisonous mushrooms.
+
+However, accuracy alone does not tell us what types of errors the model makes.
+
+# Precision
+
+**Precision** answers the following question:
+
+> Among the mushrooms classified by the model as poisonous, what proportion are actually poisonous?
+
+$$Precision=TPTP+FP
+Precision = \\frac{TP}{TP + FP}$$
+
+High precision means that when the model predicts that a mushroom is poisonous, this prediction is usually correct.
+
+A false positive occurs when an edible mushroom is classified as poisonous.
+
+# Recall
+
+**Recall** answers the following question:
+
+> Among all actually poisonous mushrooms, what proportion did the model correctly identify?
+
+$$Recall=TPTP+FN
+Recall = \\frac{TP}{TP + FN}$$
+
+In this application, recall is particularly important because a **false negative** means that a poisonous mushroom was classified as edible.
+
+Therefore, a high recall means that the model detects a large proportion of the poisonous mushrooms.
+
+# Confusion matrix
+
+A confusion matrix gives a detailed view of the classification results.
+
+For this problem:
+
+|                        | Predicted edible | Predicted poisonous |
+|------------------------|------------------|---------------------|
+| **Actually edible**    | True Negative    | False Positive      |
+| **Actually poisonous** | False Negative   | True Positive       |
+
+The most important error to examine is the **false negative**:
+
+> an actually poisonous mushroom classified as edible.
+
+# Cross-validation
+
+Instead of relying on one train-validation split, we use **5-fold cross-validation**.
+
+The training data is divided into five parts. The model is trained on four parts and evaluated on the remaining part.
+
+This process is repeated five times, with each part used as the validation set once.
+
+Cross-validation gives us a more stable estimate of model performance and allows us to compare different algorithms using the same data.
+
+```{python}
+from sklearn.model_selection import StratifiedKFold, cross_validate  
+cv = StratifiedKFold(     n_splits=5,     shuffle=True,     random_state=42 ) 
+```
+
+We will evaluate the models using accuracy, precision and recall.
+
+Because poisonous mushrooms are the positive class, `pos_label="p"` is used for precision and recall.
+
+```{python}
+from sklearn.metrics import (     accuracy_score,     precision_score,     recall_score,     make_scorer )  
+
+scoring = {     "accuracy": "accuracy",     "precision": make_scorer(         precision_score,         pos_label="p"     ),     "recall": make_scorer(         recall_score,         pos_label="p"     ) } 
+```
+
+# Comparing the models using cross-validation
+
+```{python}
+
+models = {"Decision Tree":decision_tree, 
+    "Random Forest": random_forest,     "SVM": svm }  
+cv_results = [] 
+
+for name, model in models.items():      scores = cross_validate(model,  X_train, y_train, cv=cv,    scoring=scoring,         n_jobs=-1 )
+
+
+cv_results.append({ "Model": name,     "Accuracy": scores["test_accuracy"].mean(),"Precision": scores["test_precision"].mean(),         "Recall": scores["test_recall"].mean()})  
+
+cv_results = pd.DataFrame(cv_results) 
+cv_results.round(4) 
+```
+
+To make the comparison easier to read:
+
+```{python}
+cv_results.sort_values(     by="Recall",     ascending=False ) 
+```
+
+For this problem, recall is particularly important because it measures how effectively the model identifies poisonous mushrooms.
+
+The model comparison should therefore consider all three metrics, with particular attention to the recall for the poisonous class.
+
+# Visual comparison of model performance
+
+```{python}         
+import matplotlib.pyplot as plt
+
+plot_data = cv_results.set_index("Model")
+plot_data.plot(     kind="bar",     figsize=(10, 6) )  
+plt.title("Model Performance Based on 5-Fold Cross-Validation") 
+plt.xlabel("Model") 
+plt.ylabel("Score") 
+plt.ylim(0, 1) 
+plt.xticks(rotation=0) 
+plt.legend(title="Metric") 
+plt.grid(axis="y", alpha=0.2)  
+plt.tight_layout() 
+plt.show() 
+```
+
+# Selecting a model
+
+The model can now be selected based on its cross-validation results.
+
+Because the main concern is correctly identifying poisonous mushrooms, recall should receive particular attention.
+
+The following code identifies the model with the highest mean recall:
+
+```{python}
+best_model_name = (cv_results     .sort_values(         by=["Recall", "Precision", "Accuracy"],         ascending=False     )     .iloc[0]["Model"] )  
+best_model_name 
+```
+
+The corresponding model is then selected:
+
+```{python}
+best_model = models[best_model_name]
+print("Selected model:",best_model_name) 
+```
+
+The selection above is based only on the cross-validation results from the training data. The test set has not been used to select the model.
+
+# Hyperparameter optimization
+
+After identifying the most promising algorithm, its hyperparameters can be optimized.
+
+For example, for a Random Forest we can test:
+
+- number of trees,
+
+- maximum tree depth,
+
+- minimum number of observations required to split a node.
+
+The same approach can be applied to the other algorithms.
+
+```{python}         
+from sklearn.model_selection import GridSearchCV  
+if best_model_name == "Random Forest":
+    param_grid = {"model__n_estimators": [100, 200, 300],
+                   "model__max_depth": [None, 10, 20],         "model__min_samples_split": [2, 5, 10]} 
+elif best_model_name == "Decision Tree":
+    param_grid = {"model__max_depth": [None, 5, 10, 20],         "model__min_samples_split": [2, 5, 10],         "model__min_samples_leaf": [1, 2, 5]}
+else:
+    param_grid = {"model__C": [0.1, 1, 10],         "model__kernel": ["linear", "rbf"]     } 
+```
+
+We use cross-validation again during hyperparameter optimization.
+
+```{python}         
+grid_search = GridSearchCV(     estimator=best_model,     param_grid=param_grid,     scoring="recall",     cv=cv,     n_jobs=-1 )  
+grid_search.fit(X_train, y_train) 
+```
+
+The best parameters are:
+
+```{python}         
+print("Best parameters:") 
+print(grid_search.best_params_)
+print("\nBest cross-validation recall:") 
+print(round(grid_search.best_score_, 4)) 
+```
+
+The optimized model is:
+
+```{python}         
+final_model = grid_search.best_estimator_ 
+print("Final model:", final_model)
+```
+
+# Final evaluation on the test set
+
+The test set has not been used during model selection or hyperparameter optimization.
+
+It can therefore now be used for the final evaluation.
+
+```{python}         
+y_pred = final_model.predict(X_test) 
+```
+
+## Accuracy
+
+```{python}         
+test_accuracy = accuracy_score(     y_test,     y_pred )  
+print(f"Accuracy: {test_accuracy:.4f}") 
+```
+
+## Precision
+
+```{python}         
+test_precision = precision_score(     y_test,     y_pred,     pos_label="p" )  
+print(f"Precision: {test_precision:.4f}") 
+```
+
+## Recall
+
+```{python}         
+test_recall = recall_score(     y_test,     y_pred,     pos_label="p" )  
+print(f"Recall: {test_recall:.4f}") 
+```
+
+We can display all metrics together:
+
+```{python}         
+final_metrics = pd.DataFrame({     "Metric": [         "Accuracy",         "Precision",         "Recall"     ],     "Score": [         test_accuracy,         test_precision,         test_recall     ] })  
+final_metrics 
+```
+
+# Confusion matrix
+
+The confusion matrix allows us to examine the types of errors made by the final model.
+
+```{python}         
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay 
+cm = confusion_matrix(     y_test,     y_pred,     labels=["e", "p"] )  
+disp = ConfusionMatrixDisplay(     confusion_matrix=cm,     display_labels=["Edible", "Poisonous"] )  
+fig, ax = plt.subplots(figsize=(7, 6))  
+disp.plot(     ax=ax,     values_format="d",     colorbar=False )  
+ax.set_title("Confusion Matrix – Final Model") 
+plt.tight_layout() 
+plt.show() 
+```
+
+The four cells have the following interpretation:
+
+- **True Negative (TN):** edible mushroom correctly classified as edible.
+
+- **False Positive (FP):** edible mushroom classified as poisonous.
+
+- **False Negative (FN):** poisonous mushroom classified as edible.
+
+- **True Positive (TP):** poisonous mushroom correctly classified as poisonous.
+
+The **false negative** count is particularly important in this application because it represents poisonous mushrooms that the model failed to identify.
+
+# Classification report
+
+A classification report provides several evaluation metrics for both classes.
+
+```{python}          
+from sklearn.metrics import classification_report  
+print(     classification_report(         y_test,         y_pred,         target_names=["Edible", "Poisonous"]     ) ) 
+```
+
+This allows us to examine whether the model performs similarly for both classes.
+
+# Testing the model on new data
+
+The final step is to consider how the model performs on data that was not used during model development.
+
+The test set used above is already an example of previously unseen data: it was separated before model training and was not used for model selection or hyperparameter optimization.
+
+For a real-world application, an additional external dataset would provide an even stronger test of generalization.
+
+The new data must have the same predictor variables as the training data.
+
+For example:
+
+```{python}         
+# Example structure of completely new observations  
+new_data = pd.DataFrame({
+    "cap-shape": ["x", "f"],
+    "cap-surface": ["s", "y"],
+    "cap-color": ["n", "g"],
+    "bruises": ["t", "f"],
+    "odor": ["n", "f"],
+    "gill-attachment": ["f", "f"],
+    "gill-spacing": ["c", "c"],
+    "gill-size": ["b", "n"],
+    "gill-color": ["p", "b"],
+    "stalk-shape": ["e", "t"],
+    "stalk-root": ["e", "b"],
+    "stalk-surface-above-ring": ["s", "s"],
+    "stalk-surface-below-ring": ["s", "s"],
+    "stalk-color-above-ring": ["w", "g"],
+    "stalk-color-below-ring": ["w", "g"],
+    "veil-type": ["p", "p"],
+    "veil-color": ["w", "w"],
+    "ring-number": ["o", "o"],
+    "ring-type": ["p", "e"],
+    "spore-print-color": ["n", "k"],
+    "population": ["y", "v"],
+    "habitat": ["d", "g"]
+})
+
+new_data
+```
+
+The trained model can then make predictions:
+
+```{python}         
+new_predictions = final_model.predict(new_data)  
+new_predictions 
+```
+
+The predictions can be converted into meaningful class labels:
+
+```{python}         
+prediction_labels = pd.Series(     new_predictions ).map({     "e": "Edible",     "p": "Poisonous" })  
+prediction_labels 
+```
+
+The important advantage of using a pipeline is that the new observations are automatically transformed using the same preprocessing steps that were learned from the training data.
+
+# What should be considered when evaluating the model?
+
+Several aspects should be considered when evaluating a classification model for poisonous and edible mushrooms.
+
+## 1. Class balance
+
+The distribution of the two target classes should be examined.
+
+If one class is substantially more common than the other, accuracy can become misleading.
+
+```{python}         
+y_train.value_counts(normalize=True).mul(100).round(2) 
+```
+
+## 2. Accuracy
+
+Accuracy provides an overall measure of how many predictions are correct.
+
+However, it does not distinguish between different types of classification errors.
+
+## 3. Precision
+
+Precision tells us how reliable the model is when it predicts that a mushroom is poisonous.
+
+A low precision means that the model produces more false alarms by classifying edible mushrooms as poisonous.
+
+## 4. Recall
+
+Recall measures how many of the actually poisonous mushrooms are correctly identified.
+
+For this particular classification problem, recall for the poisonous class deserves particular attention because a false negative corresponds to a poisonous mushroom being classified as edible.
+
+## 5. Confusion matrix
+
+The confusion matrix should be examined to understand exactly which types of errors the model makes.
+
+In particular, the number of:
+
+**False Negatives = poisonous mushrooms classified as edible**
+
+should be carefully monitored.
+
+## 6. Cross-validation
+
+Cross-validation provides information about how stable the model's performance is across different subsets of the training data.
+
+Large differences between folds may indicate that model performance depends strongly on the particular observations used for training.
+
+## 7. Generalization to unseen data
+
+The final model should be evaluated on observations that were not used during model development.
+
+The test set provides one such evaluation. Ideally, an additional independent dataset should also be used to assess how well the model generalizes to new observations.
+
+# Summary
+
+The complete modelling workflow is:
+
+1.  Define the classification problem.
+
+2.  Separate predictors and target.
+
+3.  Identify the two target classes.
+
+4.  Split the data into training and test sets.
+
+5.  Encode categorical variables.
+
+6.  Build classification pipelines.
+
+7.  Compare Decision Tree, Random Forest and SVM.
+
+8.  Use 5-fold cross-validation.
+
+9.  Compare accuracy, precision and recall.
+
+10. Pay particular attention to recall for the poisonous class.
+
+11. Select a model based on the cross-validation results.
+
+12. Optimize its hyperparameters.
+
+13. Evaluate the final model on the previously unseen test set.
+
+14. Analyse the confusion matrix.
+
+15. Evaluate the model on an independent dataset when available.
+
+This workflow separates **model development** from **final model evaluation**, reducing the risk of overly optimistic performance estimates..

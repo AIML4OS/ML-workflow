@@ -1,82 +1,432 @@
 ---
-title: "A basic chapter"
-format: html # This qmd file will be compiled as an HTML web page
+
+title: "Explanatory Data Analysis (EDA)"
+format: html
+editor: visual
 ---
 
-__Open the associated notebook__: <a href="https://datalab.sspcloud.fr/launcher/ide/vscode-python?name=Notebook1&version=2.3.19&s3=region-79669f20&init.personalInit=«https%3A%2F%2Fraw.githubusercontent.com%2FAIML4OS%2FAIML4OS-template-quarto-python%2Frefs%2Fheads%2Fmain%2Fsspcloud%2Finit-trainees.sh»&init.personalInitArgs=«notebooks%2Fnotebook1.ipynb»&git.repository=«https%3A%2F%2Fgithub.com%2FAIML4OS%2FAIML4OS-template-quarto-python.git»&autoLaunch=true" target="_blank" rel="noopener" data-original-href="https://datalab.sspcloud.fr/launcher/ide/vscode-python?name=Notebook1&version=2.3.19&s3=region-79669f20&init.personalInit=«https%3A%2F%2Fraw.githubusercontent.com%2FAIML4OS%2FAIML4OS-template-quarto-python%2Frefs%2Fheads%2Fmain%2Fsspcloud%2Finit-trainees.sh»&init.personalInitArgs=«notebooks%2Fnotebook1.ipynb»&git.repository=«https%3A%2F%2Fgithub.com%2FAIML4OS%2FAIML4OS-template-quarto-python.git»&autoLaunch=true"><img src="https://custom-icon-badges.demolab.com/badge/SSP%20Cloud-Launch_with_RStudio-blue?logo=vsc&amp;logoColor=white" alt="Onyxia"></a>
 
-# A beautiful figure
+# Loading the dataset
 
-This chunk shows how you can produce a beautiful figure.
+In the first step, we load the Mushroom dataset from the **UCI Machine Learning Repository** using the `ucimlrepo` package.
 
 ```{python}
-#| label: fig-polar
-#| fig-cap: "A line plot on a polar axis"
+from ucimlrepo import fetch_ucirepo
 
-import numpy as np
+# Fetch the Mushroom dataset
+mushroom = fetch_ucirepo(id=73)
+
+# Data as pandas DataFrames
+X = mushroom.data.features
+y = mushroom.data.targets
+```
+
+The dataset is divided into two parts:
+
+* `X` contains the predictor variables (features),
+* `y` contains the target variable, indicating whether a mushroom is edible or poisonous.
+
+# Creating a pandas DataFrame
+
+For exploratory data analysis, it is convenient to combine the features and the target variable into a single pandas DataFrame.
+
+```{python}
+import pandas as pd
+
+# Combine features and target into one DataFrame
+df = pd.concat([X, y], axis=1)
+
+# Display the first five observations
+df.head()
+```
+
+We can also check the basic dimensions and column names of the dataset.
+
+```{python}
+# Dataset dimensions
+print("Dataset shape:", df.shape)
+
+# Column names
+print("\nColumn names:")
+print(df.columns.tolist())
+```
+
+The dataset contains **8,124 observations and 23 variables**: 22 explanatory variables and one target variable.
+
+# Description of the dataset
+
+The **Mushroom Dataset** contains information about hypothetical samples corresponding to 23 species of gilled mushrooms from the *Agaricus* and *Lepiota* genera.
+
+Each observation represents a mushroom described using a set of categorical physical characteristics. These characteristics include the shape and colour of the cap, odour, characteristics of the gills and stalk, ring characteristics, spore-print colour, population, and habitat.
+
+The dataset contains:
+
+* **8,124 observations**,
+* **22 explanatory variables**,
+* **1 target variable**,
+* exclusively categorical variables.
+
+The target variable, `poisonous`, indicates whether a mushroom is:
+
+* `e` – edible,
+* `p` – poisonous.
+
+Therefore, the dataset can be treated as a **binary classification problem**.
+
+The fact that all explanatory variables are categorical makes this dataset particularly useful for demonstrating:
+
+* exploratory data analysis,
+* categorical data preprocessing,
+* categorical encoding,
+* feature selection,
+* classification algorithms,
+* model evaluation.
+
+**Source:** [UCI Machine Learning Repository – Mushroom Dataset](https://archive.ics.uci.edu/dataset/73/mushroom)
+
+**DOI:** [10.24432/C5959T](https://doi.org/10.24432/C5959T)
+
+**License:** CC BY 4.0
+
+# Exploratory Data Analysis
+
+Before building a machine learning model, it is useful to perform **Exploratory Data Analysis (EDA)**.
+
+The purpose of EDA is to understand:
+
+* the structure of the dataset,
+* the types of variables,
+* the presence of missing values,
+* the distribution of the target variable,
+* the number of categories in each variable,
+* the distribution of individual categories,
+* and potential relationships between explanatory variables and the target.
+
+This information helps us understand the data before applying machine learning methods.
+
+## Dataset structure
+
+First, we inspect the general structure of the DataFrame using `info()`.
+
+```{python}
+df.info()
+```
+
+This allows us to check:
+
+* the number of observations,
+* the number of variables,
+* column names,
+* data types,
+* and the number of non-null observations.
+
+The variables are categorical and are represented using character codes.
+
+An important issue for further analysis is the presence of missing values. In this dataset, missing information is represented by the character `?` in the `stalk-root` variable. Therefore, although pandas may not identify these values as conventional `NaN` values, they should be treated as missing values during preprocessing.
+
+## Distribution of the target variable
+
+The next step is to examine the distribution of the target variable.
+
+```{python}
+df["poisonous"].value_counts()
+```
+
+This shows the number of observations belonging to each target class.
+
+The dataset contains two classes:
+
+* `e` – edible,
+* `p` – poisonous.
+
+The classes are relatively well represented, although they are not perfectly balanced.
+
+A visual representation makes this easier to interpret.
+
+```{python}
 import matplotlib.pyplot as plt
 
-r = np.arange(0, 2, 0.01)
-theta = 2 * np.pi * r
-fig, ax = plt.subplots(
-  subplot_kw = {'projection': 'polar'} 
-)
-ax.plot(theta, r)
-ax.set_rticks([0.5, 1, 1.5, 2])
-ax.grid(True)
+df["poisonous"].value_counts().plot(kind="bar")
+
+plt.title("Distribution of the target variable")
+plt.xlabel("Class")
+plt.ylabel("Number of mushrooms")
+plt.xticks(rotation=0)
+plt.tight_layout()
 plt.show()
 ```
 
-## A beautiful dataframe
+The relatively similar number of observations in both classes is useful for classification because the model is not dealing with an extremely imbalanced target variable.
 
-This section demonstrates how to create and display a simple pandas DataFrame.
+Nevertheless, class proportions should always be checked before evaluating a classification model.
+
+## Number of unique values in each variable
+
+The next step is to determine how many unique categories are present in each variable.
 
 ```{python}
-#| label: tbl-pandas
-#| tbl-cap: "Simple pandas DataFrame"
+unique_values = pd.DataFrame({
+    "variable": df.columns,
+    "unique_values": df.nunique()
+})
 
+unique_values
+```
+
+This analysis shows that the variables have different numbers of categories.
+
+For example:
+
+* `bruises` has 2 categories,
+* `cap-surface` has 4 categories,
+* `cap-color` has 10 categories,
+* `gill-color` has 12 categories,
+* `odor` has 9 categories.
+
+The target variable `poisonous` has two categories.
+
+This information is important when deciding how categorical variables should be encoded before applying machine learning algorithms.
+
+We can also visualize the number of categories for each variable.
+
+```{python}
+unique_values_sorted = unique_values.sort_values(
+    "unique_values",
+    ascending=True
+)
+
+unique_values_sorted.plot(
+    x="variable",
+    y="unique_values",
+    kind="barh",
+    figsize=(8, 8),
+    legend=False
+)
+
+plt.title("Number of unique categories by variable")
+plt.xlabel("Number of unique values")
+plt.ylabel("Variable")
+plt.tight_layout()
+plt.show()
+```
+
+## Description of the categorical variables
+
+The variables describe different physical characteristics of mushrooms.
+
+| Variable                   | Number of categories | Description                                                                                                                                                  |
+| :------------------------- | -------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `cap-shape`                |                    6 | `b` = bell, `c` = conical, `x` = convex, `f` = flat, `k` = knobbed, `s` = sunken                                                                             |
+| `cap-surface`              |                    4 | `f` = fibrous, `g` = grooves, `y` = scaly, `s` = smooth                                                                                                      |
+| `cap-color`                |                   10 | `n` = brown, `b` = buff, `c` = cinnamon, `g` = gray, `r` = green, `p` = pink, `u` = purple, `e` = red, `w` = white, `y` = yellow                             |
+| `bruises`                  |                    2 | `t` = bruises, `f` = no bruises                                                                                                                              |
+| `odor`                     |                    9 | `a` = almond, `l` = anise, `c` = creosote, `y` = fishy, `f` = foul, `m` = musty, `n` = none, `p` = pungent, `s` = spicy                                      |
+| `gill-attachment`          |           2 observed | `a` = attached, `d` = descending, `f` = free, `n` = notched                                                                                                  |
+| `gill-spacing`             |           2 observed | `c` = close, `w` = crowded, `d` = distant                                                                                                                    |
+| `gill-size`                |                    2 | `b` = broad, `n` = narrow                                                                                                                                    |
+| `gill-color`               |                   12 | `k` = black, `n` = brown, `b` = buff, `h` = chocolate, `g` = gray, `r` = green, `o` = orange, `p` = pink, `u` = purple, `e` = red, `w` = white, `y` = yellow |
+| `stalk-shape`              |                    2 | `e` = enlarging, `t` = tapering                                                                                                                              |
+| `stalk-root`               |           4 observed | `b` = bulbous, `c` = club, `e` = equal, `?` = missing                                                                                                        |
+| `stalk-surface-above-ring` |                    4 | `f` = fibrous, `y` = scaly, `k` = silky, `s` = smooth                                                                                                        |
+| `stalk-surface-below-ring` |                    4 | `f` = fibrous, `y` = scaly, `k` = silky, `s` = smooth                                                                                                        |
+| `stalk-color-above-ring`   |                    9 | `n` = brown, `b` = buff, `c` = cinnamon, `g` = gray, `o` = orange, `p` = pink, `e` = red, `w` = white, `y` = yellow                                          |
+| `stalk-color-below-ring`   |                    9 | `n` = brown, `b` = buff, `c` = cinnamon, `g` = gray, `o` = orange, `p` = pink, `e` = red, `w` = white, `y` = yellow                                          |
+| `veil-type`                |                    1 | `p` = partial                                                                                                                                                |
+| `veil-color`               |                    4 | `n` = brown, `o` = orange, `w` = white, `y` = yellow                                                                                                         |
+| `ring-number`              |                    3 | `n` = none, `o` = one, `t` = two                                                                                                                             |
+| `ring-type`                |           5 observed | `e` = evanescent, `f` = flaring, `l` = large, `n` = none, `p` = pendant                                                                                      |
+| `spore-print-color`        |                    9 | `k` = black, `n` = brown, `b` = buff, `h` = chocolate, `r` = green, `o` = orange, `u` = purple, `w` = white, `y` = yellow                                    |
+| `population`               |                    6 | `a` = abundant, `c` = clustered, `n` = numerous, `s` = scattered, `v` = several, `y` = solitary                                                              |
+| `habitat`                  |                    7 | `g` = grasses, `l` = leaves, `m` = meadows, `p` = paths, `u` = urban, `w` = waste, `d` = woods                                                               |
+| `poisonous`                |                    2 | `e` = edible, `p` = poisonous                                                                                                                                |
+
+
+The distinction between **possible categories documented for a variable** and **categories actually observed in this particular dataset** is important. For this reason, the table reports the number of observed categories for variables where not all documented categories occur in the data.
+
+## Distribution of individual categorical variables
+
+Since the dataset contains only categorical variables, bar charts are an appropriate way to examine the distribution of individual features.
+
+For example, we can examine the `odor` variable.
+
+```{python}
+df["odor"].value_counts().plot(kind="bar")
+
+plt.title("Distribution of mushroom odor")
+plt.xlabel("Odor")
+plt.ylabel("Number of observations")
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
+```
+
+This visualization shows how frequently each odor category occurs in the dataset.
+
+Looking at the distribution of individual variables is useful because some categories may occur very frequently, while others may be relatively rare.
+
+## Relationship between odor and the target variable
+
+### Principal Component Analysis
+
+Principal Component Analysis (PCA) is used here to visualize the overall structure of the Mushroom dataset in a two-dimensional space. Since all explanatory variables are categorical, they are first transformed using one-hot encoding.
+
+The first two principal components are then used to project the 8,124 observations onto a two-dimensional plane. Each point represents one mushroom, while the colour indicates whether the mushroom is edible or poisonous.
+
+The ellipses indicate the approximate spread of observations within each class. They help assess whether the two classes occupy clearly separated regions of the feature space.
+
+The percentage shown on each axis represents the proportion of variance explained by the corresponding principal component. The combined percentage indicates how much of the variation in the encoded dataset is represented by the two-dimensional PCA projection.
+
+A visible separation between the two classes would suggest that the categorical characteristics contain a substantial amount of information related to the target variable.
+
+```{python}
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.decomposition import PCA
 import pandas as pd
+import matplotlib.pyplot as plt
+from matplotlib.patches import Ellipse
+import numpy as np
 
-data = {
-    "Name": ["Alice", "Bob", "Charlie"],
-    "Age": [25, 30, 35],
-    "City": ["Paris", "Dublin", "Berlin"]
-}
+# Separate predictors and target
+X = df.drop(columns="poisonous")
+y = df["poisonous"]
 
-df = pd.DataFrame(data)
-df
-```
+# Treat '?' as a missing-value code
+X = X.replace("?", pd.NA)
 
-## A more sophisticated table
-
-This section demonstrates how to create and display a simple pandas DataFrame.
-
-```{python}
-from great_tables import GT, html
-from great_tables.data import sza
-import polars as pl
-from polars import col as c
-import polars.selectors as cs
-
-sza_pivot = (
-    pl.from_pandas(sza)
-    .filter((c.latitude == "20") & (c.tst <= "1200"))
-    .select(pl.col("*").exclude("latitude"))
-    .drop_nulls()
-    .pivot(values="sza", index="month", on="tst", sort_columns=True)
+# One-hot encoding of categorical variables
+encoder = OneHotEncoder(
+    handle_unknown="ignore",
+    sparse_output=False
 )
 
-(
-    GT(sza_pivot, rowname_col="month")
-    .data_color(
-        domain=[90, 0],
-        palette=["rebeccapurple", "white", "orange"],
-        na_color="white",
-    )
-    .tab_header(
-        title="Solar Zenith Angles from 05:30 to 12:00",
-        subtitle=html("Average monthly values at latitude of 20&deg;N."),
-    )
-    .sub_missing(missing_text="")
+X_encoded = encoder.fit_transform(X)
+
+# PCA
+pca = PCA(n_components=2)
+X_pca = pca.fit_transform(X_encoded)
+
+pca_df = pd.DataFrame(
+    X_pca,
+    columns=["PC1", "PC2"]
 )
+
+pca_df["Class"] = y.map({
+    "e": "Edible",
+    "p": "Poisonous"
+})
+
+explained_pc1 = pca.explained_variance_ratio_[0]
+explained_pc2 = pca.explained_variance_ratio_[1]
+explained_total = explained_pc1 + explained_pc2
+
+
+# Function for confidence ellipse
+def add_confidence_ellipse(ax, x, y, n_std=2):
+    covariance = np.cov(x, y)
+    eigenvalues, eigenvectors = np.linalg.eigh(covariance)
+
+    order = eigenvalues.argsort()[::-1]
+    eigenvalues = eigenvalues[order]
+    eigenvectors = eigenvectors[:, order]
+
+    angle = np.degrees(
+        np.arctan2(
+            eigenvectors[1, 0],
+            eigenvectors[0, 0]
+        )
+    )
+
+    width, height = 2 * n_std * np.sqrt(eigenvalues)
+
+    ellipse = Ellipse(
+        xy=(np.mean(x), np.mean(y)),
+        width=width,
+        height=height,
+        angle=angle,
+        fill=False,
+        linewidth=2
+    )
+
+    ax.add_patch(ellipse)
+
+
+# Create figure
+fig, ax = plt.subplots(figsize=(11, 7))
+
+# Plot both classes
+for class_name in ["Edible", "Poisonous"]:
+
+    subset = pca_df[pca_df["Class"] == class_name]
+
+    ax.scatter(
+        subset["PC1"],
+        subset["PC2"],
+        s=18,
+        alpha=0.25,
+        label=class_name
+    )
+
+    add_confidence_ellipse(
+        ax,
+        subset["PC1"].values,
+        subset["PC2"].values,
+        n_std=2
+    )
+
+
+# Labels
+ax.set_xlabel(
+    f"PC1 — {explained_pc1:.1%} of variance",
+    fontsize=11
+)
+
+ax.set_ylabel(
+    f"PC2 — {explained_pc2:.1%} of variance",
+    fontsize=11
+)
+
+ax.set_title(
+    "PCA Projection of the Mushroom Dataset",
+    fontsize=15,
+    pad=15
+)
+
+ax.legend(
+    title="Mushroom class",
+    frameon=False
+)
+
+ax.grid(
+    alpha=0.15,
+    linestyle="--"
+)
+
+# Remove unnecessary borders
+ax.spines["top"].set_visible(False)
+ax.spines["right"].set_visible(False)
+
+# Annotation
+ax.text(
+    0.02,
+    0.02,
+    f"PC1 + PC2 explain {explained_total:.1%} of total variance",
+    transform=ax.transAxes,
+    fontsize=10
+)
+
+plt.tight_layout()
+plt.show()
 ```
+# Summary of the exploratory analysis
+
+The EDA provides several important observations about the Mushroom dataset.
+
+First, the dataset consists entirely of categorical variables, making it a useful example for working with categorical data in machine learning.
+
+Second, the target variable contains two classes: edible and poisonous. The classes are relatively well represented, so there is no severe class imbalance.
+
+Third, the explanatory variables have different numbers of categories. Some variables contain only two categories, while others contain considerably more.
+
+Finally, comparing categorical variables with the target variable provides an initial indication of which characteristics may contain information useful for classification.
+
+The EDA does not by itself determine which variables should be used in the final model. However, it provides a basis for the next stages of the analysis, including **data preprocessing, categorical encoding, feature selection, model training, and model evaluation**.
