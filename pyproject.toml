@@ -11,6 +11,5 @@ dependencies = [
     "numpy>=2.2.0",
     "pandas>=2.3.0",
     "scikit-learn>=1.7.0",
-    "ucimlrepo>=0.0.7",
-    "
+    "ucimlrepo>=0.0.7"
 ]
