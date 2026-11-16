@@ -216,7 +216,6 @@ window.Quarto = {
    
   <ul>
   <li><a href="#classification-problem" id="toc-classification-problem" class="nav-link active" data-scroll-target="#classification-problem">Classification problem</a></li>
-  <li><a href="#type-of-machine-learning" id="toc-type-of-machine-learning" class="nav-link" data-scroll-target="#type-of-machine-learning">Type of machine learning</a></li>
   <li><a href="#preparing-the-data" id="toc-preparing-the-data" class="nav-link" data-scroll-target="#preparing-the-data">Preparing the data</a>
   <ul class="collapse">
   <li><a href="#check-the-target-variable" id="toc-check-the-target-variable" class="nav-link" data-scroll-target="#check-the-target-variable">Check the target variable</a></li>
@@ -293,13 +292,7 @@ window.Quarto = {
 <li><p><code>p</code> — poisonous</p></li>
 </ul>
 <p>This is a <strong>binary classification problem</strong>, because the target variable contains two possible classes.</p>
-<p>The main objective is not only to achieve a high overall classification accuracy, but also to make sure that poisonous mushrooms are correctly identified.</p>
-<blockquote class="blockquote">
-<p><strong>Important:</strong> This dataset is used for demonstrating machine learning methods. A model trained on this dataset should not be used to determine whether a real mushroom is safe to eat.</p>
-</blockquote>
-</section>
-<section id="type-of-machine-learning" class="level1">
-<h1>Type of machine learning</h1>
+<p>The main objective is not only to achieve a high overall classification accuracy, but also to make sure that poisonous mushrooms are correctly identified. ::: callout-warning &gt; ## Important This dataset is used for demonstrating machine learning methods. A model trained on this dataset should not be used to determine whether a real mushroom is safe to eat. ::: # Type of machine learning</p>
 <p>This is a <strong>supervised learning</strong> problem.</p>
 <p>We have:</p>
 <ul>
@@ -322,7 +315,7 @@ window.Quarto = {
 </ul>
 <p>One-hot encoding transforms these categories into binary variables.</p>
 <p>We will also treat <code>?</code> as a missing-value code. In this dataset, <code>?</code> occurs for some categorical characteristics and should not be treated as an ordinary category.</p>
-<div id="bb9811f4" class="cell" data-execution_count="1">
+<div id="42d546e5" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -498,7 +491,7 @@ window.Quarto = {
 </div>
 <section id="check-the-target-variable" class="level2">
 <h2 class="anchored" data-anchor-id="check-the-target-variable">Check the target variable</h2>
-<div id="8f3ddf8a" class="cell" data-execution_count="2">
+<div id="2914618d" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"poisonous"</span>].value_counts() </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -511,7 +504,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 <p>We can also calculate the percentage of each class.</p>
-<div id="d8ae5963" class="cell" data-execution_count="3">
+<div id="983d3ed7" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"poisonous"</span>].value_counts(normalize<span class="op">=</span><span class="va">True</span>).mul(<span class="dv">100</span>).<span class="bu">round</span>(<span class="dv">2</span>) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -536,7 +529,7 @@ Name: proportion, dtype: float64</code></pre>
 <p>The training set is used to train and compare the models.</p>
 <p>The test set is kept separate and is used only for the final evaluation.</p>
 <p>We use <code>stratify=y</code> to preserve approximately the same proportion of edible and poisonous mushrooms in both datasets.</p>
-<div id="96820985" class="cell" data-execution_count="4">
+<div id="a66adf36" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
@@ -554,7 +547,7 @@ Test observations: 1625</code></pre>
 </div>
 </div>
 <p>We can verify the class distribution in both datasets.</p>
-<div id="4633f8a7" class="cell" data-execution_count="5">
+<div id="07780119" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Training set:"</span>) </span>
@@ -582,7 +575,7 @@ Name: proportion, dtype: float64</code></pre>
 <p>All explanatory variables are categorical.</p>
 <p>We use <code>OneHotEncoder</code> to convert them into numerical variables.</p>
 <p>The encoder is placed inside a <code>Pipeline</code>. This is important because the encoding is then fitted separately within each training fold during cross-validation.</p>
-<div id="6e44651b" class="cell" data-execution_count="6">
+<div id="c3a013ae" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> OneHotEncoder </span>
@@ -605,7 +598,7 @@ Name: proportion, dtype: float64</code></pre>
 <p>A decision tree creates a sequence of rules that divide the observations into groups.</p>
 <p>For example, the model may learn that a particular combination of mushroom characteristics is strongly associated with the poisonous class.</p>
 <p>Decision trees are also relatively easy to interpret.</p>
-<div id="8997f354" class="cell" data-execution_count="7">
+<div id="aca76d09" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.tree <span class="im">import</span> DecisionTreeClassifier  </span>
@@ -617,7 +610,7 @@ Name: proportion, dtype: float64</code></pre>
 <h2 class="anchored" data-anchor-id="random-forest">Random Forest</h2>
 <p>Random Forest is an ensemble method based on multiple decision trees.</p>
 <p>Each tree is trained using a different sample of the data and a different subset of variables. The final prediction is obtained by combining the predictions of the individual trees.</p>
-<div id="934f558b" class="cell" data-execution_count="8">
+<div id="04a46f23" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestClassifier  </span>
@@ -629,7 +622,7 @@ Name: proportion, dtype: float64</code></pre>
 <h2 class="anchored" data-anchor-id="support-vector-machine">Support Vector Machine</h2>
 <p>Support Vector Machine (SVM) attempts to find a decision boundary that separates the classes.</p>
 <p>SVM can be effective when the classes are separated by complex relationships between the input variables.</p>
-<div id="7453f9ac" class="cell" data-execution_count="9">
+<div id="87d5b627" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.svm <span class="im">import</span> SVC  </span>
@@ -654,7 +647,7 @@ Name: proportion, dtype: float64</code></pre>
 <section id="accuracy" class="level1">
 <h1>Accuracy</h1>
 <p><strong>Accuracy</strong> measures the proportion of all predictions that were correct.</p>
-<p><span class="math display">\[Accuracy = \\frac{TP + TN}{TP + TN + FP + FN}\]</span></p>
+<p><span class="math display">\[Accuracy = \frac{TP + TN}{TP + TN + FP + FN}\]</span></p>
 <p>where:</p>
 <ul>
 <li><p><code>TP</code> = poisonous mushrooms correctly classified as poisonous,</p></li>
@@ -672,7 +665,7 @@ Name: proportion, dtype: float64</code></pre>
 <p>Among the mushrooms classified by the model as poisonous, what proportion are actually poisonous?</p>
 </blockquote>
 <p><span class="math display">\[Precision=TPTP+FP
-Precision = \\frac{TP}{TP + FP}\]</span></p>
+Precision = \frac{TP}{TP + FP}\]</span></p>
 <p>High precision means that when the model predicts that a mushroom is poisonous, this prediction is usually correct.</p>
 <p>A false positive occurs when an edible mushroom is classified as poisonous.</p>
 </section>
@@ -683,7 +676,7 @@ Precision = \\frac{TP}{TP + FP}\]</span></p>
 <p>Among all actually poisonous mushrooms, what proportion did the model correctly identify?</p>
 </blockquote>
 <p><span class="math display">\[Recall=TPTP+FN
-Recall = \\frac{TP}{TP + FN}\]</span></p>
+Recall = \frac{TP}{TP + FN}\]</span></p>
 <p>In this application, recall is particularly important because a <strong>false negative</strong> means that a poisonous mushroom was classified as edible.</p>
 <p>Therefore, a high recall means that the model detects a large proportion of the poisonous mushrooms.</p>
 </section>
@@ -723,7 +716,7 @@ Recall = \\frac{TP}{TP + FN}\]</span></p>
 <p>The training data is divided into five parts. The model is trained on four parts and evaluated on the remaining part.</p>
 <p>This process is repeated five times, with each part used as the validation set once.</p>
 <p>Cross-validation gives us a more stable estimate of model performance and allows us to compare different algorithms using the same data.</p>
-<div id="fba4f752" class="cell" data-execution_count="10">
+<div id="9ba70c18" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> StratifiedKFold, cross_validate  </span>
@@ -732,7 +725,7 @@ Recall = \\frac{TP}{TP + FN}\]</span></p>
 </div>
 <p>We will evaluate the models using accuracy, precision and recall.</p>
 <p>Because poisonous mushrooms are the positive class, <code>pos_label="p"</code> is used for precision and recall.</p>
-<div id="8d35c8b0" class="cell" data-execution_count="11">
+<div id="7a9303f7" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> (     accuracy_score,     precision_score,     recall_score,     make_scorer )  </span>
@@ -743,7 +736,7 @@ Recall = \\frac{TP}{TP + FN}\]</span></p>
 </section>
 <section id="comparing-the-models-using-cross-validation" class="level1">
 <h1>Comparing the models using cross-validation</h1>
-<div id="6824bbf9" class="cell" data-execution_count="12">
+<div id="6c321b35" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>models <span class="op">=</span> {<span class="st">"Decision Tree"</span>:decision_tree, </span>
@@ -787,7 +780,7 @@ Recall = \\frac{TP}{TP + FN}\]</span></p>
 </div>
 </div>
 <p>To make the comparison easier to read:</p>
-<div id="0e9d7a54" class="cell" data-execution_count="13">
+<div id="5e7d6fa9" class="cell" data-execution_count="13">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>cv_results.sort_values(     by<span class="op">=</span><span class="st">"Recall"</span>,     ascending<span class="op">=</span><span class="va">False</span> ) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -825,7 +818,7 @@ Recall = \\frac{TP}{TP + FN}\]</span></p>
 </section>
 <section id="visual-comparison-of-model-performance" class="level1">
 <h1>Visual comparison of model performance</h1>
-<div id="4eff68e7" class="cell" data-execution_count="14">
+<div id="1d67fab0" class="cell" data-execution_count="14">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -856,7 +849,7 @@ Recall = \\frac{TP}{TP + FN}\]</span></p>
 <p>The model can now be selected based on its cross-validation results.</p>
 <p>Because the main concern is correctly identifying poisonous mushrooms, recall should receive particular attention.</p>
 <p>The following code identifies the model with the highest mean recall:</p>
-<div id="d3b40e5a" class="cell" data-execution_count="15">
+<div id="276e16e7" class="cell" data-execution_count="15">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>best_model_name <span class="op">=</span> (cv_results     .sort_values(         by<span class="op">=</span>[<span class="st">"Recall"</span>, <span class="st">"Precision"</span>, <span class="st">"Accuracy"</span>],         ascending<span class="op">=</span><span class="va">False</span>     )     .iloc[<span class="dv">0</span>][<span class="st">"Model"</span>] )  </span>
@@ -867,7 +860,7 @@ Recall = \\frac{TP}{TP + FN}\]</span></p>
 </div>
 </div>
 <p>The corresponding model is then selected:</p>
-<div id="1df8e726" class="cell" data-execution_count="16">
+<div id="685d2ea4" class="cell" data-execution_count="16">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>best_model <span class="op">=</span> models[best_model_name]</span>
@@ -889,7 +882,7 @@ Recall = \\frac{TP}{TP + FN}\]</span></p>
 <li><p>minimum number of observations required to split a node.</p></li>
 </ul>
 <p>The same approach can be applied to the other algorithms.</p>
-<div id="492ce95a" class="cell" data-execution_count="17">
+<div id="77070ba9" class="cell" data-execution_count="17">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> GridSearchCV  </span>
@@ -903,676 +896,12 @@ Recall = \\frac{TP}{TP + FN}\]</span></p>
 </details>
 </div>
 <p>We use cross-validation again during hyperparameter optimization.</p>
-<div id="0f85c8a0" class="cell" data-execution_count="18">
+<div id="e3dc290c" class="cell" data-execution_count="18">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>grid_search <span class="op">=</span> GridSearchCV(     estimator<span class="op">=</span>best_model,     param_grid<span class="op">=</span>param_grid,     scoring<span class="op">=</span><span class="st">"recall"</span>,     cv<span class="op">=</span>cv,     n_jobs<span class="op">=-</span><span class="dv">1</span> )  </span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>grid_search.fit(X_train, y_train) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-stderr">
-<pre><code>/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/model_selection/_validation.py:960: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
-Traceback (most recent call last):
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/model_selection/_validation.py", line 949, in _score
-    scores = scorer(estimator, X_test, y_test, **score_params)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/utils/validation.py", line 80, in inner_f
-    return f(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 328, in __call__
-    return self._score(partial(_cached_call, None), estimator, X, y_true, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 461, in _score
-    y_pred = method_caller(
-             ^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 97, in _cached_call
-    result, _ = _get_response_values(
-                ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/utils/_response.py", line 208, in _get_response_values
-    raise ValueError(
-ValueError: pos_label=1 is not a valid label: It should be one of ['e' 'p']
-
-  warnings.warn(
-/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/model_selection/_validation.py:960: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
-Traceback (most recent call last):
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/model_selection/_validation.py", line 949, in _score
-    scores = scorer(estimator, X_test, y_test, **score_params)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/utils/validation.py", line 80, in inner_f
-    return f(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 328, in __call__
-    return self._score(partial(_cached_call, None), estimator, X, y_true, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 461, in _score
-    y_pred = method_caller(
-             ^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 97, in _cached_call
-    result, _ = _get_response_values(
-                ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/utils/_response.py", line 208, in _get_response_values
-    raise ValueError(
-ValueError: pos_label=1 is not a valid label: It should be one of ['e' 'p']
-
-  warnings.warn(
-/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/model_selection/_validation.py:960: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
-Traceback (most recent call last):
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/model_selection/_validation.py", line 949, in _score
-    scores = scorer(estimator, X_test, y_test, **score_params)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/utils/validation.py", line 80, in inner_f
-    return f(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 328, in __call__
-    return self._score(partial(_cached_call, None), estimator, X, y_true, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 461, in _score
-    y_pred = method_caller(
-             ^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 97, in _cached_call
-    result, _ = _get_response_values(
-                ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/utils/_response.py", line 208, in _get_response_values
-    raise ValueError(
-ValueError: pos_label=1 is not a valid label: It should be one of ['e' 'p']
-
-  warnings.warn(
-/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/model_selection/_validation.py:960: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
-Traceback (most recent call last):
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/model_selection/_validation.py", line 949, in _score
-    scores = scorer(estimator, X_test, y_test, **score_params)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/utils/validation.py", line 80, in inner_f
-    return f(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 328, in __call__
-    return self._score(partial(_cached_call, None), estimator, X, y_true, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 461, in _score
-    y_pred = method_caller(
-             ^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 97, in _cached_call
-    result, _ = _get_response_values(
-                ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/utils/_response.py", line 208, in _get_response_values
-    raise ValueError(
-ValueError: pos_label=1 is not a valid label: It should be one of ['e' 'p']
-
-  warnings.warn(
-/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/model_selection/_validation.py:960: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
-Traceback (most recent call last):
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/model_selection/_validation.py", line 949, in _score
-    scores = scorer(estimator, X_test, y_test, **score_params)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/utils/validation.py", line 80, in inner_f
-    return f(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 328, in __call__
-    return self._score(partial(_cached_call, None), estimator, X, y_true, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 461, in _score
-    y_pred = method_caller(
-             ^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 97, in _cached_call
-    result, _ = _get_response_values(
-                ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/utils/_response.py", line 208, in _get_response_values
-    raise ValueError(
-ValueError: pos_label=1 is not a valid label: It should be one of ['e' 'p']
-
-  warnings.warn(
-/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/model_selection/_validation.py:960: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
-Traceback (most recent call last):
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/model_selection/_validation.py", line 949, in _score
-    scores = scorer(estimator, X_test, y_test, **score_params)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/utils/validation.py", line 80, in inner_f
-    return f(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 328, in __call__
-    return self._score(partial(_cached_call, None), estimator, X, y_true, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 461, in _score
-    y_pred = method_caller(
-             ^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 97, in _cached_call
-    result, _ = _get_response_values(
-                ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/utils/_response.py", line 208, in _get_response_values
-    raise ValueError(
-ValueError: pos_label=1 is not a valid label: It should be one of ['e' 'p']
-
-  warnings.warn(
-/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/model_selection/_validation.py:960: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
-Traceback (most recent call last):
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/model_selection/_validation.py", line 949, in _score
-    scores = scorer(estimator, X_test, y_test, **score_params)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/utils/validation.py", line 80, in inner_f
-    return f(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 328, in __call__
-    return self._score(partial(_cached_call, None), estimator, X, y_true, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 461, in _score
-    y_pred = method_caller(
-             ^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 97, in _cached_call
-    result, _ = _get_response_values(
-                ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/utils/_response.py", line 208, in _get_response_values
-    raise ValueError(
-ValueError: pos_label=1 is not a valid label: It should be one of ['e' 'p']
-
-  warnings.warn(
-/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/model_selection/_validation.py:960: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
-Traceback (most recent call last):
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/model_selection/_validation.py", line 949, in _score
-    scores = scorer(estimator, X_test, y_test, **score_params)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/utils/validation.py", line 80, in inner_f
-    return f(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 328, in __call__
-    return self._score(partial(_cached_call, None), estimator, X, y_true, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 461, in _score
-    y_pred = method_caller(
-             ^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 97, in _cached_call
-    result, _ = _get_response_values(
-                ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/utils/_response.py", line 208, in _get_response_values
-    raise ValueError(
-ValueError: pos_label=1 is not a valid label: It should be one of ['e' 'p']
-
-  warnings.warn(
-/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/model_selection/_validation.py:960: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
-Traceback (most recent call last):
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/model_selection/_validation.py", line 949, in _score
-    scores = scorer(estimator, X_test, y_test, **score_params)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/utils/validation.py", line 80, in inner_f
-    return f(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 328, in __call__
-    return self._score(partial(_cached_call, None), estimator, X, y_true, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 461, in _score
-    y_pred = method_caller(
-             ^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 97, in _cached_call
-    result, _ = _get_response_values(
-                ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/utils/_response.py", line 208, in _get_response_values
-    raise ValueError(
-ValueError: pos_label=1 is not a valid label: It should be one of ['e' 'p']
-
-  warnings.warn(
-/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/model_selection/_validation.py:960: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
-Traceback (most recent call last):
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/model_selection/_validation.py", line 949, in _score
-    scores = scorer(estimator, X_test, y_test, **score_params)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/utils/validation.py", line 80, in inner_f
-    return f(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 328, in __call__
-    return self._score(partial(_cached_call, None), estimator, X, y_true, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 461, in _score
-    y_pred = method_caller(
-             ^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 97, in _cached_call
-    result, _ = _get_response_values(
-                ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/utils/_response.py", line 208, in _get_response_values
-    raise ValueError(
-ValueError: pos_label=1 is not a valid label: It should be one of ['e' 'p']
-
-  warnings.warn(
-/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/model_selection/_validation.py:960: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
-Traceback (most recent call last):
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/model_selection/_validation.py", line 949, in _score
-    scores = scorer(estimator, X_test, y_test, **score_params)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/utils/validation.py", line 80, in inner_f
-    return f(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 328, in __call__
-    return self._score(partial(_cached_call, None), estimator, X, y_true, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 461, in _score
-    y_pred = method_caller(
-             ^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 97, in _cached_call
-    result, _ = _get_response_values(
-                ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/utils/_response.py", line 208, in _get_response_values
-    raise ValueError(
-ValueError: pos_label=1 is not a valid label: It should be one of ['e' 'p']
-
-  warnings.warn(
-/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/model_selection/_validation.py:960: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
-Traceback (most recent call last):
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/model_selection/_validation.py", line 949, in _score
-    scores = scorer(estimator, X_test, y_test, **score_params)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/utils/validation.py", line 80, in inner_f
-    return f(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 328, in __call__
-    return self._score(partial(_cached_call, None), estimator, X, y_true, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 461, in _score
-    y_pred = method_caller(
-             ^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 97, in _cached_call
-    result, _ = _get_response_values(
-                ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/utils/_response.py", line 208, in _get_response_values
-    raise ValueError(
-ValueError: pos_label=1 is not a valid label: It should be one of ['e' 'p']
-
-  warnings.warn(
-/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/model_selection/_validation.py:960: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
-Traceback (most recent call last):
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/model_selection/_validation.py", line 949, in _score
-    scores = scorer(estimator, X_test, y_test, **score_params)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/utils/validation.py", line 80, in inner_f
-    return f(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 328, in __call__
-    return self._score(partial(_cached_call, None), estimator, X, y_true, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 461, in _score
-    y_pred = method_caller(
-             ^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 97, in _cached_call
-    result, _ = _get_response_values(
-                ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/utils/_response.py", line 208, in _get_response_values
-    raise ValueError(
-ValueError: pos_label=1 is not a valid label: It should be one of ['e' 'p']
-
-  warnings.warn(
-/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/model_selection/_validation.py:960: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
-Traceback (most recent call last):
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/model_selection/_validation.py", line 949, in _score
-    scores = scorer(estimator, X_test, y_test, **score_params)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/utils/validation.py", line 80, in inner_f
-    return f(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 328, in __call__
-    return self._score(partial(_cached_call, None), estimator, X, y_true, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 461, in _score
-    y_pred = method_caller(
-             ^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 97, in _cached_call
-    result, _ = _get_response_values(
-                ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/utils/_response.py", line 208, in _get_response_values
-    raise ValueError(
-ValueError: pos_label=1 is not a valid label: It should be one of ['e' 'p']
-
-  warnings.warn(
-/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/model_selection/_validation.py:960: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
-Traceback (most recent call last):
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/model_selection/_validation.py", line 949, in _score
-    scores = scorer(estimator, X_test, y_test, **score_params)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/utils/validation.py", line 80, in inner_f
-    return f(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 328, in __call__
-    return self._score(partial(_cached_call, None), estimator, X, y_true, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 461, in _score
-    y_pred = method_caller(
-             ^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 97, in _cached_call
-    result, _ = _get_response_values(
-                ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/utils/_response.py", line 208, in _get_response_values
-    raise ValueError(
-ValueError: pos_label=1 is not a valid label: It should be one of ['e' 'p']
-
-  warnings.warn(
-/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/model_selection/_validation.py:960: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
-Traceback (most recent call last):
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/model_selection/_validation.py", line 949, in _score
-    scores = scorer(estimator, X_test, y_test, **score_params)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/utils/validation.py", line 80, in inner_f
-    return f(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 328, in __call__
-    return self._score(partial(_cached_call, None), estimator, X, y_true, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 461, in _score
-    y_pred = method_caller(
-             ^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 97, in _cached_call
-    result, _ = _get_response_values(
-                ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/utils/_response.py", line 208, in _get_response_values
-    raise ValueError(
-ValueError: pos_label=1 is not a valid label: It should be one of ['e' 'p']
-
-  warnings.warn(
-/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/model_selection/_validation.py:960: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
-Traceback (most recent call last):
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/model_selection/_validation.py", line 949, in _score
-    scores = scorer(estimator, X_test, y_test, **score_params)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/utils/validation.py", line 80, in inner_f
-    return f(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 328, in __call__
-    return self._score(partial(_cached_call, None), estimator, X, y_true, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 461, in _score
-    y_pred = method_caller(
-             ^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 97, in _cached_call
-    result, _ = _get_response_values(
-                ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/utils/_response.py", line 208, in _get_response_values
-    raise ValueError(
-ValueError: pos_label=1 is not a valid label: It should be one of ['e' 'p']
-
-  warnings.warn(
-/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/model_selection/_validation.py:960: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
-Traceback (most recent call last):
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/model_selection/_validation.py", line 949, in _score
-    scores = scorer(estimator, X_test, y_test, **score_params)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/utils/validation.py", line 80, in inner_f
-    return f(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 328, in __call__
-    return self._score(partial(_cached_call, None), estimator, X, y_true, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 461, in _score
-    y_pred = method_caller(
-             ^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 97, in _cached_call
-    result, _ = _get_response_values(
-                ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/utils/_response.py", line 208, in _get_response_values
-    raise ValueError(
-ValueError: pos_label=1 is not a valid label: It should be one of ['e' 'p']
-
-  warnings.warn(
-/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/model_selection/_validation.py:960: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
-Traceback (most recent call last):
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/model_selection/_validation.py", line 949, in _score
-    scores = scorer(estimator, X_test, y_test, **score_params)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/utils/validation.py", line 80, in inner_f
-    return f(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 328, in __call__
-    return self._score(partial(_cached_call, None), estimator, X, y_true, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 461, in _score
-    y_pred = method_caller(
-             ^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 97, in _cached_call
-    result, _ = _get_response_values(
-                ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/utils/_response.py", line 208, in _get_response_values
-    raise ValueError(
-ValueError: pos_label=1 is not a valid label: It should be one of ['e' 'p']
-
-  warnings.warn(
-/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/model_selection/_validation.py:960: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
-Traceback (most recent call last):
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/model_selection/_validation.py", line 949, in _score
-    scores = scorer(estimator, X_test, y_test, **score_params)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/utils/validation.py", line 80, in inner_f
-    return f(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 328, in __call__
-    return self._score(partial(_cached_call, None), estimator, X, y_true, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 461, in _score
-    y_pred = method_caller(
-             ^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 97, in _cached_call
-    result, _ = _get_response_values(
-                ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/utils/_response.py", line 208, in _get_response_values
-    raise ValueError(
-ValueError: pos_label=1 is not a valid label: It should be one of ['e' 'p']
-
-  warnings.warn(
-/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/model_selection/_validation.py:960: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
-Traceback (most recent call last):
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/model_selection/_validation.py", line 949, in _score
-    scores = scorer(estimator, X_test, y_test, **score_params)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/utils/validation.py", line 80, in inner_f
-    return f(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 328, in __call__
-    return self._score(partial(_cached_call, None), estimator, X, y_true, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 461, in _score
-    y_pred = method_caller(
-             ^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 97, in _cached_call
-    result, _ = _get_response_values(
-                ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/utils/_response.py", line 208, in _get_response_values
-    raise ValueError(
-ValueError: pos_label=1 is not a valid label: It should be one of ['e' 'p']
-
-  warnings.warn(
-/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/model_selection/_validation.py:960: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
-Traceback (most recent call last):
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/model_selection/_validation.py", line 949, in _score
-    scores = scorer(estimator, X_test, y_test, **score_params)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/utils/validation.py", line 80, in inner_f
-    return f(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 328, in __call__
-    return self._score(partial(_cached_call, None), estimator, X, y_true, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 461, in _score
-    y_pred = method_caller(
-             ^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 97, in _cached_call
-    result, _ = _get_response_values(
-                ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/utils/_response.py", line 208, in _get_response_values
-    raise ValueError(
-ValueError: pos_label=1 is not a valid label: It should be one of ['e' 'p']
-
-  warnings.warn(
-/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/model_selection/_validation.py:960: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
-Traceback (most recent call last):
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/model_selection/_validation.py", line 949, in _score
-    scores = scorer(estimator, X_test, y_test, **score_params)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/utils/validation.py", line 80, in inner_f
-    return f(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 328, in __call__
-    return self._score(partial(_cached_call, None), estimator, X, y_true, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 461, in _score
-    y_pred = method_caller(
-             ^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 97, in _cached_call
-    result, _ = _get_response_values(
-                ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/utils/_response.py", line 208, in _get_response_values
-    raise ValueError(
-ValueError: pos_label=1 is not a valid label: It should be one of ['e' 'p']
-
-  warnings.warn(
-/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/model_selection/_validation.py:960: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
-Traceback (most recent call last):
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/model_selection/_validation.py", line 949, in _score
-    scores = scorer(estimator, X_test, y_test, **score_params)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/utils/validation.py", line 80, in inner_f
-    return f(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 328, in __call__
-    return self._score(partial(_cached_call, None), estimator, X, y_true, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 461, in _score
-    y_pred = method_caller(
-             ^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 97, in _cached_call
-    result, _ = _get_response_values(
-                ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/utils/_response.py", line 208, in _get_response_values
-    raise ValueError(
-ValueError: pos_label=1 is not a valid label: It should be one of ['e' 'p']
-
-  warnings.warn(
-/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/model_selection/_validation.py:960: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
-Traceback (most recent call last):
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/model_selection/_validation.py", line 949, in _score
-    scores = scorer(estimator, X_test, y_test, **score_params)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/utils/validation.py", line 80, in inner_f
-    return f(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 328, in __call__
-    return self._score(partial(_cached_call, None), estimator, X, y_true, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 461, in _score
-    y_pred = method_caller(
-             ^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 97, in _cached_call
-    result, _ = _get_response_values(
-                ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/utils/_response.py", line 208, in _get_response_values
-    raise ValueError(
-ValueError: pos_label=1 is not a valid label: It should be one of ['e' 'p']
-
-  warnings.warn(
-/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/model_selection/_validation.py:960: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
-Traceback (most recent call last):
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/model_selection/_validation.py", line 949, in _score
-    scores = scorer(estimator, X_test, y_test, **score_params)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/utils/validation.py", line 80, in inner_f
-    return f(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 328, in __call__
-    return self._score(partial(_cached_call, None), estimator, X, y_true, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 461, in _score
-    y_pred = method_caller(
-             ^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 97, in _cached_call
-    result, _ = _get_response_values(
-                ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/utils/_response.py", line 208, in _get_response_values
-    raise ValueError(
-ValueError: pos_label=1 is not a valid label: It should be one of ['e' 'p']
-
-  warnings.warn(
-/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/model_selection/_validation.py:960: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
-Traceback (most recent call last):
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/model_selection/_validation.py", line 949, in _score
-    scores = scorer(estimator, X_test, y_test, **score_params)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/utils/validation.py", line 80, in inner_f
-    return f(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 328, in __call__
-    return self._score(partial(_cached_call, None), estimator, X, y_true, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 461, in _score
-    y_pred = method_caller(
-             ^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 97, in _cached_call
-    result, _ = _get_response_values(
-                ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/utils/_response.py", line 208, in _get_response_values
-    raise ValueError(
-ValueError: pos_label=1 is not a valid label: It should be one of ['e' 'p']
-
-  warnings.warn(
-/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/model_selection/_validation.py:960: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
-Traceback (most recent call last):
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/model_selection/_validation.py", line 949, in _score
-    scores = scorer(estimator, X_test, y_test, **score_params)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/utils/validation.py", line 80, in inner_f
-    return f(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 328, in __call__
-    return self._score(partial(_cached_call, None), estimator, X, y_true, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 461, in _score
-    y_pred = method_caller(
-             ^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 97, in _cached_call
-    result, _ = _get_response_values(
-                ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/utils/_response.py", line 208, in _get_response_values
-    raise ValueError(
-ValueError: pos_label=1 is not a valid label: It should be one of ['e' 'p']
-
-  warnings.warn(
-/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/model_selection/_validation.py:960: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
-Traceback (most recent call last):
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/model_selection/_validation.py", line 949, in _score
-    scores = scorer(estimator, X_test, y_test, **score_params)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/utils/validation.py", line 80, in inner_f
-    return f(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 328, in __call__
-    return self._score(partial(_cached_call, None), estimator, X, y_true, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 461, in _score
-    y_pred = method_caller(
-             ^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 97, in _cached_call
-    result, _ = _get_response_values(
-                ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/utils/_response.py", line 208, in _get_response_values
-    raise ValueError(
-ValueError: pos_label=1 is not a valid label: It should be one of ['e' 'p']
-
-  warnings.warn(
-/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/model_selection/_validation.py:960: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
-Traceback (most recent call last):
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/model_selection/_validation.py", line 949, in _score
-    scores = scorer(estimator, X_test, y_test, **score_params)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/utils/validation.py", line 80, in inner_f
-    return f(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 328, in __call__
-    return self._score(partial(_cached_call, None), estimator, X, y_true, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 461, in _score
-    y_pred = method_caller(
-             ^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/metrics/_scorer.py", line 97, in _cached_call
-    result, _ = _get_response_values(
-                ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/utils/_response.py", line 208, in _get_response_values
-    raise ValueError(
-ValueError: pos_label=1 is not a valid label: It should be one of ['e' 'p']
-
-  warnings.warn(
-/home/runner/work/ML-workflow/ML-workflow/.venv/lib/python3.12/site-packages/sklearn/model_selection/_search.py:1237: UserWarning: One or more of the test scores are non-finite: [nan nan nan nan nan nan]
-  warnings.warn(</code></pre>
-</div>
 <div class="cell-output cell-output-display" data-execution_count="18">
 <style>.sk-global {
   /* Definition of color scheme common for light and dark mode */
@@ -2639,7 +1968,7 @@ available in the ``cv_results_`` dict at the keys ending with that<br>
 scorer's name (``'_&lt;scorer_name&gt;'``) instead of ``'_score'`` shown<br>
 above. ('split0_test_precision', 'mean_train_precision' etc.)</span></a></td>
 <td class="fitted-att-type">dict</td>
-<td>{'me...me': array([0.2511... 0.59147458]), 'me...me': array([0.0023... 0.00105362]), 'me...re': array([nan, n...an, nan, nan]), 'pa..._C': masked_array(...l_value=1e+20), ...}</td>
+<td>{'me...me': array([0.1543... 0.38459187]), 'me...me': array([0.0018... 0.00101776]), 'me...re': array([nan, n...an, nan, nan]), 'pa..._C': masked_array(...l_value=1e+20), ...}</td>
 </tr>
 <tr class="default even">
 <td class="param"><a href="https://scikit-learn.org/1.9/modules/generated/sklearn.model_selection.GridSearchCV.html#:~:text=feature_names_in_,-ndarray%20of%20shape%20%28n_features_in_%2C%29" class="param-doc-link" style="anchor-name: --doc-link-feature_names_in_;" rel="noreferrer" target="_blank">feature_names_in_ <span class="param-doc-description" style="position-anchor: --doc-link-feature_names_in_;"> feature_names_in_: ndarray of shape (`n_features_in_`,)<br>
@@ -2688,7 +2017,7 @@ This is present only if ``refit`` is not False.<br>
 <br>
 .. versionadded:: 0.20</span></a></td>
 <td class="fitted-att-type">float</td>
-<td>0.1814</td>
+<td>0.1234</td>
 </tr>
 <tr class="default odd">
 <td class="param"><a href="https://scikit-learn.org/1.9/modules/generated/sklearn.model_selection.GridSearchCV.html#:~:text=scorer_,-function%20or%20a%20dict" class="param-doc-link" style="anchor-name: --doc-link-scorer_;" rel="noreferrer" target="_blank">scorer_ <span class="param-doc-description" style="position-anchor: --doc-link-scorer_;"> scorer_: function or a dict<br>
@@ -3825,13 +3154,13 @@ forceTheme('sk-container-id-1');</script>
 </div>
 </div>
 <p>The best parameters are:</p>
-<div id="db5fa6eb" class="cell" data-execution_count="19">
+<div id="3a989303" class="cell" data-execution_count="19">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Best parameters:"</span>) </span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(grid_search.best_params_)</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Best cross-validation recall:"</span>) </span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">round</span>(grid_search.best_score_, <span class="dv">4</span>)) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Best parameters:"</span>) </span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(grid_search.best_params_)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Best cross-validation recall:"</span>) </span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">round</span>(grid_search.best_score_, <span class="dv">4</span>)) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Best parameters:
@@ -3842,11 +3171,11 @@ nan</code></pre>
 </div>
 </div>
 <p>The optimized model is:</p>
-<div id="c1b3fa6f" class="cell" data-execution_count="20">
+<div id="8f72b901" class="cell" data-execution_count="20">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>final_model <span class="op">=</span> grid_search.best_estimator_ </span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Final model:"</span>, final_model)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>final_model <span class="op">=</span> grid_search.best_estimator_ </span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Final model:"</span>, final_model)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Final model: Pipeline(steps=[('encoder', OneHotEncoder(handle_unknown='ignore')),
@@ -3858,19 +3187,19 @@ nan</code></pre>
 <h1>Final evaluation on the test set</h1>
 <p>The test set has not been used during model selection or hyperparameter optimization.</p>
 <p>It can therefore now be used for the final evaluation.</p>
-<div id="2aaf6177" class="cell" data-execution_count="21">
+<div id="2d258bc4" class="cell" data-execution_count="21">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> final_model.predict(X_test) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> final_model.predict(X_test) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <section id="accuracy-1" class="level2">
 <h2 class="anchored" data-anchor-id="accuracy-1">Accuracy</h2>
-<div id="66ecb9f1" class="cell" data-execution_count="22">
+<div id="8630309b" class="cell" data-execution_count="22">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>test_accuracy <span class="op">=</span> accuracy_score(     y_test,     y_pred )  </span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Accuracy: </span><span class="sc">{</span>test_accuracy<span class="sc">:.4f}</span><span class="ss">"</span>) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>test_accuracy <span class="op">=</span> accuracy_score(     y_test,     y_pred )  </span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Accuracy: </span><span class="sc">{</span>test_accuracy<span class="sc">:.4f}</span><span class="ss">"</span>) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Accuracy: 0.9988</code></pre>
@@ -3879,11 +3208,11 @@ nan</code></pre>
 </section>
 <section id="precision-1" class="level2">
 <h2 class="anchored" data-anchor-id="precision-1">Precision</h2>
-<div id="469a43ab" class="cell" data-execution_count="23">
+<div id="716c2618" class="cell" data-execution_count="23">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>test_precision <span class="op">=</span> precision_score(     y_test,     y_pred,     pos_label<span class="op">=</span><span class="st">"p"</span> )  </span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Precision: </span><span class="sc">{</span>test_precision<span class="sc">:.4f}</span><span class="ss">"</span>) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>test_precision <span class="op">=</span> precision_score(     y_test,     y_pred,     pos_label<span class="op">=</span><span class="st">"p"</span> )  </span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Precision: </span><span class="sc">{</span>test_precision<span class="sc">:.4f}</span><span class="ss">"</span>) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Precision: 1.0000</code></pre>
@@ -3892,22 +3221,22 @@ nan</code></pre>
 </section>
 <section id="recall-1" class="level2">
 <h2 class="anchored" data-anchor-id="recall-1">Recall</h2>
-<div id="3e9e8971" class="cell" data-execution_count="24">
+<div id="a99147d8" class="cell" data-execution_count="24">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>test_recall <span class="op">=</span> recall_score(     y_test,     y_pred,     pos_label<span class="op">=</span><span class="st">"p"</span> )  </span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Recall: </span><span class="sc">{</span>test_recall<span class="sc">:.4f}</span><span class="ss">"</span>) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>test_recall <span class="op">=</span> recall_score(     y_test,     y_pred,     pos_label<span class="op">=</span><span class="st">"p"</span> )  </span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Recall: </span><span class="sc">{</span>test_recall<span class="sc">:.4f}</span><span class="ss">"</span>) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Recall: 0.9974</code></pre>
 </div>
 </div>
 <p>We can display all metrics together:</p>
-<div id="13876f5b" class="cell" data-execution_count="25">
+<div id="ffe798d9" class="cell" data-execution_count="25">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>final_metrics <span class="op">=</span> pd.DataFrame({     <span class="st">"Metric"</span>: [         <span class="st">"Accuracy"</span>,         <span class="st">"Precision"</span>,         <span class="st">"Recall"</span>     ],     <span class="st">"Score"</span>: [         test_accuracy,         test_precision,         test_recall     ] })  </span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>final_metrics </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>final_metrics <span class="op">=</span> pd.DataFrame({     <span class="st">"Metric"</span>: [         <span class="st">"Accuracy"</span>,         <span class="st">"Precision"</span>,         <span class="st">"Recall"</span>     ],     <span class="st">"Score"</span>: [         test_accuracy,         test_precision,         test_recall     ] })  </span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>final_metrics </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="25">
 <div>
@@ -3948,17 +3277,17 @@ nan</code></pre>
 <section id="confusion-matrix-1" class="level1">
 <h1>Confusion matrix</h1>
 <p>The confusion matrix allows us to examine the types of errors made by the final model.</p>
-<div id="e3a2fb6a" class="cell" data-execution_count="26">
+<div id="80bd0559" class="cell" data-execution_count="26">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> confusion_matrix, ConfusionMatrixDisplay </span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>cm <span class="op">=</span> confusion_matrix(     y_test,     y_pred,     labels<span class="op">=</span>[<span class="st">"e"</span>, <span class="st">"p"</span>] )  </span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>disp <span class="op">=</span> ConfusionMatrixDisplay(     confusion_matrix<span class="op">=</span>cm,     display_labels<span class="op">=</span>[<span class="st">"Edible"</span>, <span class="st">"Poisonous"</span>] )  </span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">6</span>))  </span>
-<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>disp.plot(     ax<span class="op">=</span>ax,     values_format<span class="op">=</span><span class="st">"d"</span>,     colorbar<span class="op">=</span><span class="va">False</span> )  </span>
-<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Confusion Matrix – Final Model"</span>) </span>
-<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>plt.tight_layout() </span>
-<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>plt.show() </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> confusion_matrix, ConfusionMatrixDisplay </span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>cm <span class="op">=</span> confusion_matrix(     y_test,     y_pred,     labels<span class="op">=</span>[<span class="st">"e"</span>, <span class="st">"p"</span>] )  </span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>disp <span class="op">=</span> ConfusionMatrixDisplay(     confusion_matrix<span class="op">=</span>cm,     display_labels<span class="op">=</span>[<span class="st">"Edible"</span>, <span class="st">"Poisonous"</span>] )  </span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">6</span>))  </span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>disp.plot(     ax<span class="op">=</span>ax,     values_format<span class="op">=</span><span class="st">"d"</span>,     colorbar<span class="op">=</span><span class="va">False</span> )  </span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Confusion Matrix – Final Model"</span>) </span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>plt.tight_layout() </span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>plt.show() </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -3980,11 +3309,16 @@ nan</code></pre>
 <section id="classification-report" class="level1">
 <h1>Classification report</h1>
 <p>A classification report provides several evaluation metrics for both classes.</p>
-<div id="dee016ce" class="cell" data-execution_count="27">
+<div id="8710b20c" class="cell" data-execution_count="27">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> classification_report  </span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(     classification_report(         y_test,         y_pred,         target_names<span class="op">=</span>[<span class="st">"Edible"</span>, <span class="st">"Poisonous"</span>]     ) ) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> classification_report </span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(classification_report(</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>    y_test,</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>    y_pred,</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>    labels<span class="op">=</span>[<span class="st">"e"</span>, <span class="st">"p"</span>],</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>    target_names<span class="op">=</span>[<span class="st">"Edible"</span>, <span class="st">"Poisonous"</span>]</span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>              precision    recall  f1-score   support
@@ -4007,36 +3341,36 @@ weighted avg       1.00      1.00      1.00      1625
 <p>For a real-world application, an additional external dataset would provide an even stronger test of generalization.</p>
 <p>The new data must have the same predictor variables as the training data.</p>
 <p>For example:</p>
-<div id="17475af7" class="cell" data-execution_count="28">
+<div id="a3faadd7" class="cell" data-execution_count="28">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example structure of completely new observations  </span></span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>new_data <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"cap-shape"</span>: [<span class="st">"x"</span>, <span class="st">"f"</span>],</span>
-<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"cap-surface"</span>: [<span class="st">"s"</span>, <span class="st">"y"</span>],</span>
-<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"cap-color"</span>: [<span class="st">"n"</span>, <span class="st">"g"</span>],</span>
-<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"bruises"</span>: [<span class="st">"t"</span>, <span class="st">"f"</span>],</span>
-<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"odor"</span>: [<span class="st">"n"</span>, <span class="st">"f"</span>],</span>
-<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"gill-attachment"</span>: [<span class="st">"f"</span>, <span class="st">"f"</span>],</span>
-<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"gill-spacing"</span>: [<span class="st">"c"</span>, <span class="st">"c"</span>],</span>
-<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"gill-size"</span>: [<span class="st">"b"</span>, <span class="st">"n"</span>],</span>
-<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"gill-color"</span>: [<span class="st">"p"</span>, <span class="st">"b"</span>],</span>
-<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"stalk-shape"</span>: [<span class="st">"e"</span>, <span class="st">"t"</span>],</span>
-<span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"stalk-root"</span>: [<span class="st">"e"</span>, <span class="st">"b"</span>],</span>
-<span id="cb41-14"><a href="#cb41-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"stalk-surface-above-ring"</span>: [<span class="st">"s"</span>, <span class="st">"s"</span>],</span>
-<span id="cb41-15"><a href="#cb41-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"stalk-surface-below-ring"</span>: [<span class="st">"s"</span>, <span class="st">"s"</span>],</span>
-<span id="cb41-16"><a href="#cb41-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"stalk-color-above-ring"</span>: [<span class="st">"w"</span>, <span class="st">"g"</span>],</span>
-<span id="cb41-17"><a href="#cb41-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"stalk-color-below-ring"</span>: [<span class="st">"w"</span>, <span class="st">"g"</span>],</span>
-<span id="cb41-18"><a href="#cb41-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">"veil-type"</span>: [<span class="st">"p"</span>, <span class="st">"p"</span>],</span>
-<span id="cb41-19"><a href="#cb41-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">"veil-color"</span>: [<span class="st">"w"</span>, <span class="st">"w"</span>],</span>
-<span id="cb41-20"><a href="#cb41-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ring-number"</span>: [<span class="st">"o"</span>, <span class="st">"o"</span>],</span>
-<span id="cb41-21"><a href="#cb41-21" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ring-type"</span>: [<span class="st">"p"</span>, <span class="st">"e"</span>],</span>
-<span id="cb41-22"><a href="#cb41-22" aria-hidden="true" tabindex="-1"></a>    <span class="st">"spore-print-color"</span>: [<span class="st">"n"</span>, <span class="st">"k"</span>],</span>
-<span id="cb41-23"><a href="#cb41-23" aria-hidden="true" tabindex="-1"></a>    <span class="st">"population"</span>: [<span class="st">"y"</span>, <span class="st">"v"</span>],</span>
-<span id="cb41-24"><a href="#cb41-24" aria-hidden="true" tabindex="-1"></a>    <span class="st">"habitat"</span>: [<span class="st">"d"</span>, <span class="st">"g"</span>]</span>
-<span id="cb41-25"><a href="#cb41-25" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb41-26"><a href="#cb41-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-27"><a href="#cb41-27" aria-hidden="true" tabindex="-1"></a>new_data</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example structure of completely new observations  </span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>new_data <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"cap-shape"</span>: [<span class="st">"x"</span>, <span class="st">"f"</span>],</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"cap-surface"</span>: [<span class="st">"s"</span>, <span class="st">"y"</span>],</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"cap-color"</span>: [<span class="st">"n"</span>, <span class="st">"g"</span>],</span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"bruises"</span>: [<span class="st">"t"</span>, <span class="st">"f"</span>],</span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"odor"</span>: [<span class="st">"n"</span>, <span class="st">"f"</span>],</span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"gill-attachment"</span>: [<span class="st">"f"</span>, <span class="st">"f"</span>],</span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"gill-spacing"</span>: [<span class="st">"c"</span>, <span class="st">"c"</span>],</span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"gill-size"</span>: [<span class="st">"b"</span>, <span class="st">"n"</span>],</span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"gill-color"</span>: [<span class="st">"p"</span>, <span class="st">"b"</span>],</span>
+<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"stalk-shape"</span>: [<span class="st">"e"</span>, <span class="st">"t"</span>],</span>
+<span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"stalk-root"</span>: [<span class="st">"e"</span>, <span class="st">"b"</span>],</span>
+<span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"stalk-surface-above-ring"</span>: [<span class="st">"s"</span>, <span class="st">"s"</span>],</span>
+<span id="cb40-15"><a href="#cb40-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"stalk-surface-below-ring"</span>: [<span class="st">"s"</span>, <span class="st">"s"</span>],</span>
+<span id="cb40-16"><a href="#cb40-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"stalk-color-above-ring"</span>: [<span class="st">"w"</span>, <span class="st">"g"</span>],</span>
+<span id="cb40-17"><a href="#cb40-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"stalk-color-below-ring"</span>: [<span class="st">"w"</span>, <span class="st">"g"</span>],</span>
+<span id="cb40-18"><a href="#cb40-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">"veil-type"</span>: [<span class="st">"p"</span>, <span class="st">"p"</span>],</span>
+<span id="cb40-19"><a href="#cb40-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">"veil-color"</span>: [<span class="st">"w"</span>, <span class="st">"w"</span>],</span>
+<span id="cb40-20"><a href="#cb40-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ring-number"</span>: [<span class="st">"o"</span>, <span class="st">"o"</span>],</span>
+<span id="cb40-21"><a href="#cb40-21" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ring-type"</span>: [<span class="st">"p"</span>, <span class="st">"e"</span>],</span>
+<span id="cb40-22"><a href="#cb40-22" aria-hidden="true" tabindex="-1"></a>    <span class="st">"spore-print-color"</span>: [<span class="st">"n"</span>, <span class="st">"k"</span>],</span>
+<span id="cb40-23"><a href="#cb40-23" aria-hidden="true" tabindex="-1"></a>    <span class="st">"population"</span>: [<span class="st">"y"</span>, <span class="st">"v"</span>],</span>
+<span id="cb40-24"><a href="#cb40-24" aria-hidden="true" tabindex="-1"></a>    <span class="st">"habitat"</span>: [<span class="st">"d"</span>, <span class="st">"g"</span>]</span>
+<span id="cb40-25"><a href="#cb40-25" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb40-26"><a href="#cb40-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-27"><a href="#cb40-27" aria-hidden="true" tabindex="-1"></a>new_data</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="28">
 <div>
@@ -4126,22 +3460,22 @@ weighted avg       1.00      1.00      1.00      1625
 </div>
 </div>
 <p>The trained model can then make predictions:</p>
-<div id="5e269d04" class="cell" data-execution_count="29">
+<div id="5aed6640" class="cell" data-execution_count="29">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>new_predictions <span class="op">=</span> final_model.predict(new_data)  </span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>new_predictions </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>new_predictions <span class="op">=</span> final_model.predict(new_data)  </span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>new_predictions </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="29">
 <pre><code>array(['e', 'p'], dtype=object)</code></pre>
 </div>
 </div>
 <p>The predictions can be converted into meaningful class labels:</p>
-<div id="cc3abc45" class="cell" data-execution_count="30">
+<div id="6f4670ea" class="cell" data-execution_count="30">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>prediction_labels <span class="op">=</span> pd.Series(     new_predictions ).<span class="bu">map</span>({     <span class="st">"e"</span>: <span class="st">"Edible"</span>,     <span class="st">"p"</span>: <span class="st">"Poisonous"</span> })  </span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>prediction_labels </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>prediction_labels <span class="op">=</span> pd.Series(     new_predictions ).<span class="bu">map</span>({     <span class="st">"e"</span>: <span class="st">"Edible"</span>,     <span class="st">"p"</span>: <span class="st">"Poisonous"</span> })  </span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>prediction_labels </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="30">
 <pre><code>0       Edible
@@ -4158,10 +3492,10 @@ dtype: object</code></pre>
 <h2 class="anchored" data-anchor-id="class-balance">1. Class balance</h2>
 <p>The distribution of the two target classes should be examined.</p>
 <p>If one class is substantially more common than the other, accuracy can become misleading.</p>
-<div id="7b21b09c" class="cell" data-execution_count="31">
+<div id="9c8f6663" class="cell" data-execution_count="31">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>y_train.value_counts(normalize<span class="op">=</span><span class="va">True</span>).mul(<span class="dv">100</span>).<span class="bu">round</span>(<span class="dv">2</span>) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>y_train.value_counts(normalize<span class="op">=</span><span class="va">True</span>).mul(<span class="dv">100</span>).<span class="bu">round</span>(<span class="dv">2</span>) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="31">
 <pre><code>poisonous
@@ -4207,23 +3541,8 @@ Name: proportion, dtype: float64</code></pre>
 <section id="summary" class="level1">
 <h1>Summary</h1>
 <p>The complete modelling workflow is:</p>
-<ol type="1">
-<li><p>Define the classification problem.</p></li>
-<li><p>Separate predictors and target.</p></li>
-<li><p>Identify the two target classes.</p></li>
-<li><p>Split the data into training and test sets.</p></li>
-<li><p>Encode categorical variables.</p></li>
-<li><p>Build classification pipelines.</p></li>
-<li><p>Compare Decision Tree, Random Forest and SVM.</p></li>
-<li><p>Use 5-fold cross-validation.</p></li>
-<li><p>Compare accuracy, precision and recall.</p></li>
-<li><p>Pay particular attention to recall for the poisonous class.</p></li>
-<li><p>Select a model based on the cross-validation results.</p></li>
-<li><p>Optimize its hyperparameters.</p></li>
-<li><p>Evaluate the final model on the previously unseen test set.</p></li>
-<li><p>Analyse the confusion matrix.</p></li>
-<li><p>Evaluate the model on an independent dataset when available.</p></li>
-</ol>
+<p><img src="../images/Przepływ klasyfikacji grzybów metodą ML.png" class="img-fluid"></p>
+<p><em>Source: AI-generated illustration (OpenAI, 2026).</em></p>
 <p>This workflow separates <strong>model development</strong> from <strong>final model evaluation</strong>, reducing the risk of overly optimistic performance estimates..</p>
 
 
