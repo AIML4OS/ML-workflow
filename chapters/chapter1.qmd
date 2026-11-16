@@ -64,6 +64,12 @@ The dataset contains:
 - **1 target variable**,
 - exclusively categorical variables.
 
+![](/images/edible_poisounous.png)
+
+```         
+*Source: AI-generated illustration (OpenAI, 2026).  For educational and illustrative purposes only.*
+```
+
 The target variable, `poisonous`, indicates whether a mushroom is:
 
 - `e` – edible,
@@ -209,7 +215,7 @@ plt.show()
 The variables describe different physical characteristics of mushrooms.
 
 | Variable | Number of categories | Description |
-|:----------------|----------------:|:-------------------------------------|
+|:-----------------|-----------------:|:------------------------------------|
 | `cap-shape` | 6 | `b` = bell, `c` = conical, `x` = convex, `f` = flat, `k` = knobbed, `s` = sunken |
 | `cap-surface` | 4 | `f` = fibrous, `g` = grooves, `y` = scaly, `s` = smooth |
 | `cap-color` | 10 | `n` = brown, `b` = buff, `c` = cinnamon, `g` = gray, `r` = green, `p` = pink, `u` = purple, `e` = red, `w` = white, `y` = yellow |
@@ -271,9 +277,8 @@ The percentage shown on each axis represents the proportion of variance explaine
 
 A visible separation between the two classes would suggest that the categorical characteristics contain a substantial amount of information related to the target variable.
 
-::: {.callout-warning}
-> **Technical Note on PCA for Categorical Data:** 
-> Principal Component Analysis (PCA) is mathematically designed for continuous, numeric variables. Applying PCA to binary columns generated via One-Hot Encoding results in a very sparse matrix, which can distort variance explanation and distances. Furthermore, missing values (originally marked as `?`) must be explicitly handled (e.g., encoded as a distinct category or imputed) prior to encoder fitting to avoid `TypeError` exceptions in `scikit-learn`. For purely categorical datasets, alternatives like **Multiple Correspondence Analysis (MCA)** are often theoretically more appropriate.
+::: callout-warning
+> **Technical Note on PCA for Categorical Data:** Principal Component Analysis (PCA) is mathematically designed for continuous, numeric variables. Applying PCA to binary columns generated via One-Hot Encoding results in a very sparse matrix, which can distort variance explanation and distances. Furthermore, missing values (originally marked as `?`) must be explicitly handled (e.g., encoded as a distinct category or imputed) prior to encoder fitting to avoid `TypeError` exceptions in `scikit-learn`. For purely categorical datasets, alternatives like **Multiple Correspondence Analysis (MCA)** are often theoretically more appropriate.
 :::
 
 ```{python}
@@ -348,7 +353,7 @@ def add_confidence_ellipse(ax, x, y, n_std=2):
 
 
 # Create figure
-fig, ax = plt.subplots(figsize=(11, 7))
+fig, ax = plt.subplots(figsize=(8, 6))
 
 # Plot both classes
 for class_name in ["Edible", "Poisonous"]:
@@ -415,20 +420,22 @@ plt.tight_layout()
 plt.show()
 ```
 
-::: {.callout-warning}
+::: callout-warning
 ## Caveat on Confidence Ellipses:
+
 The confidence ellipses plotted on the PCA projection assume a bivariate normal distribution of the data points within each class. However, because the underlying data is derived from One-Hot Encoded categorical variables, the projected points often exhibit non-normal distributions, clustering, or discrete patterns. Therefore, these ellipses should be interpreted purely as visual heuristics to illustrate the approximate spread and overlap of the classes rather than strict statistical confidence regions.
 :::
+
 # Summary of the exploratory analysis
 
 The EDA provides several important observations about the Mushroom dataset.
 
-First, the dataset consists entirely of categorical variables, making it a useful example for working with categorical data in machine learning.
+- First, the dataset consists entirely of categorical variables, making it a useful example for working with categorical data in machine learning.
 
-Second, the target variable contains two classes: edible and poisonous. The classes are relatively well represented, so there is no severe class imbalance.
+- Second, the target variable contains two classes: edible and poisonous. The classes are relatively well represented, so there is no severe class imbalance.
 
-Third, the explanatory variables have different numbers of categories. Some variables contain only two categories, while others contain considerably more.
+- Third, the explanatory variables have different numbers of categories. Some variables contain only two categories, while others contain considerably more.
 
-Finally, comparing categorical variables with the target variable provides an initial indication of which characteristics may contain information useful for classification.
+- Finally, comparing categorical variables with the target variable provides an initial indication of which characteristics may contain information useful for classification.
 
 The EDA does not by itself determine which variables should be used in the final model. However, it provides a basis for the next stages of the analysis, including **data preprocessing, categorical encoding, feature selection, model training, and model evaluation**.
