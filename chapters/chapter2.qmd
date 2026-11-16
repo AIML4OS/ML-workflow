@@ -20,7 +20,16 @@ The target variable is:
 
 This is a **binary classification problem**, because the target variable contains two possible classes.
 
-The main objective is not only to achieve a high overall classification accuracy, but also to make sure that poisonous mushrooms are correctly identified. \::: callout-warning \> \## Important This dataset is used for demonstrating machine learning methods. A model trained on this dataset should not be used to determine whether a real mushroom is safe to eat. \::: \# Type of machine learning
+The main objective is not only to achieve a high overall classification accuracy, but also to make sure that poisonous mushrooms are correctly identified.
+
+
+::: callout-warning 
+## Important
+This dataset is used for demonstrating machine learning methods. A model trained on this dataset should not be used to determine whether a real mushroom is safe to eat.
+
+:::
+
+# Type of machine learning
 
 This is a **supervised learning** problem.
 
@@ -593,7 +602,7 @@ The test set provides one such evaluation. Ideally, an additional independent da
 
 The complete modelling workflow is:
 
-![](/images/Przepływ klasyfikacji grzybów metodą ML.png)
+![](/images/Przepływ%20klasyfikacji%20grzybów%20metodą%20ML.png)
 
 *Source: AI-generated illustration (OpenAI, 2026).*
 
