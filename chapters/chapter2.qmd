@@ -2,6 +2,10 @@
 title: "Defining The Problem"
 format: html
 editor: visual
+execute:
+  warning: false
+  message: false
+  echo: true
 ---
 
 # Classification problem
@@ -16,11 +20,7 @@ The target variable is:
 
 This is a **binary classification problem**, because the target variable contains two possible classes.
 
-The main objective is not only to achieve a high overall classification accuracy, but also to make sure that poisonous mushrooms are correctly identified.
-
-> **Important:** This dataset is used for demonstrating machine learning methods. A model trained on this dataset should not be used to determine whether a real mushroom is safe to eat.
-
-# Type of machine learning
+The main objective is not only to achieve a high overall classification accuracy, but also to make sure that poisonous mushrooms are correctly identified. \::: callout-warning \> \## Important This dataset is used for demonstrating machine learning methods. A model trained on this dataset should not be used to determine whether a real mushroom is safe to eat. \::: \# Type of machine learning
 
 This is a **supervised learning** problem.
 
@@ -199,7 +199,7 @@ This is important because the interpretation of precision and recall depends on 
 
 **Accuracy** measures the proportion of all predictions that were correct.
 
-$$Accuracy = \\frac{TP + TN}{TP + TN + FP + FN}$$
+$$Accuracy = \frac{TP + TN}{TP + TN + FP + FN}$$
 
 where:
 
@@ -222,7 +222,7 @@ However, accuracy alone does not tell us what types of errors the model makes.
 > Among the mushrooms classified by the model as poisonous, what proportion are actually poisonous?
 
 $$Precision=TPTP+FP
-Precision = \\frac{TP}{TP + FP}$$
+Precision = \frac{TP}{TP + FP}$$
 
 High precision means that when the model predicts that a mushroom is poisonous, this prediction is usually correct.
 
@@ -235,7 +235,7 @@ A false positive occurs when an edible mushroom is classified as poisonous.
 > Among all actually poisonous mushrooms, what proportion did the model correctly identify?
 
 $$Recall=TPTP+FN
-Recall = \\frac{TP}{TP + FN}$$
+Recall = \frac{TP}{TP + FN}$$
 
 In this application, recall is particularly important because a **false negative** means that a poisonous mushroom was classified as edible.
 
@@ -466,8 +466,13 @@ The **false negative** count is particularly important in this application becau
 A classification report provides several evaluation metrics for both classes.
 
 ```{python}
-from sklearn.metrics import classification_report  
-print(     classification_report(         y_test,         y_pred,         target_names=["Edible", "Poisonous"]     ) ) 
+from sklearn.metrics import classification_report 
+print(classification_report(
+    y_test,
+    y_pred,
+    labels=["e", "p"],
+    target_names=["Edible", "Poisonous"]
+))
 ```
 
 This allows us to examine whether the model performs similarly for both classes.
@@ -588,34 +593,8 @@ The test set provides one such evaluation. Ideally, an additional independent da
 
 The complete modelling workflow is:
 
-1.  Define the classification problem.
+![](/images/Przepływ klasyfikacji grzybów metodą ML.png)
 
-2.  Separate predictors and target.
-
-3.  Identify the two target classes.
-
-4.  Split the data into training and test sets.
-
-5.  Encode categorical variables.
-
-6.  Build classification pipelines.
-
-7.  Compare Decision Tree, Random Forest and SVM.
-
-8.  Use 5-fold cross-validation.
-
-9.  Compare accuracy, precision and recall.
-
-10. Pay particular attention to recall for the poisonous class.
-
-11. Select a model based on the cross-validation results.
-
-12. Optimize its hyperparameters.
-
-13. Evaluate the final model on the previously unseen test set.
-
-14. Analyse the confusion matrix.
-
-15. Evaluate the model on an independent dataset when available.
+*Source: AI-generated illustration (OpenAI, 2026).*
 
 This workflow separates **model development** from **final model evaluation**, reducing the risk of overly optimistic performance estimates..

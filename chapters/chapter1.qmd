@@ -215,7 +215,7 @@ plt.show()
 The variables describe different physical characteristics of mushrooms.
 
 | Variable | Number of categories | Description |
-|:-----------------|-----------------:|:------------------------------------|
+|:-----------------|-----------------:|:-----------------------------------|
 | `cap-shape` | 6 | `b` = bell, `c` = conical, `x` = convex, `f` = flat, `k` = knobbed, `s` = sunken |
 | `cap-surface` | 4 | `f` = fibrous, `g` = grooves, `y` = scaly, `s` = smooth |
 | `cap-color` | 10 | `n` = brown, `b` = buff, `c` = cinnamon, `g` = gray, `r` = green, `p` = pink, `u` = purple, `e` = red, `w` = white, `y` = yellow |
