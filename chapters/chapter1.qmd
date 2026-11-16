@@ -179,8 +179,6 @@ For example:
 - `gill-color` has 12 categories,
 - `odor` has 9 categories.
 
-
-
 This information is important when deciding how categorical variables should be encoded before applying machine learning algorithms.
 
 We can also visualize the number of categories for each variable.
@@ -211,7 +209,7 @@ plt.show()
 The variables describe different physical characteristics of mushrooms.
 
 | Variable | Number of categories | Description |
-|:--------------|--------------:|:------------------------------------------|
+|:----------------|----------------:|:-------------------------------------|
 | `cap-shape` | 6 | `b` = bell, `c` = conical, `x` = convex, `f` = flat, `k` = knobbed, `s` = sunken |
 | `cap-surface` | 4 | `f` = fibrous, `g` = grooves, `y` = scaly, `s` = smooth |
 | `cap-color` | 10 | `n` = brown, `b` = buff, `c` = cinnamon, `g` = gray, `r` = green, `p` = pink, `u` = purple, `e` = red, `w` = white, `y` = yellow |
@@ -273,6 +271,11 @@ The percentage shown on each axis represents the proportion of variance explaine
 
 A visible separation between the two classes would suggest that the categorical characteristics contain a substantial amount of information related to the target variable.
 
+::: {.callout-warning}
+> **Technical Note on PCA for Categorical Data:** 
+> Principal Component Analysis (PCA) is mathematically designed for continuous, numeric variables. Applying PCA to binary columns generated via One-Hot Encoding results in a very sparse matrix, which can distort variance explanation and distances. Furthermore, missing values (originally marked as `?`) must be explicitly handled (e.g., encoded as a distinct category or imputed) prior to encoder fitting to avoid `TypeError` exceptions in `scikit-learn`. For purely categorical datasets, alternatives like **Multiple Correspondence Analysis (MCA)** are often theoretically more appropriate.
+:::
+
 ```{python}
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.decomposition import PCA
@@ -285,7 +288,7 @@ X = df.drop(columns="poisonous")
 y = df["poisonous"]
 
 # Treat '?' as a missing-value code
-X = X.replace("?", pd.NA)
+X = X.replace("?", "Missing")
 
 # One-hot encoding of categorical variables
 encoder = OneHotEncoder(
@@ -412,6 +415,10 @@ plt.tight_layout()
 plt.show()
 ```
 
+::: {.callout-warning}
+## Caveat on Confidence Ellipses:
+The confidence ellipses plotted on the PCA projection assume a bivariate normal distribution of the data points within each class. However, because the underlying data is derived from One-Hot Encoded categorical variables, the projected points often exhibit non-normal distributions, clustering, or discrete patterns. Therefore, these ellipses should be interpreted purely as visual heuristics to illustrate the approximate spread and overlap of the classes rather than strict statistical confidence regions.
+:::
 # Summary of the exploratory analysis
 
 The EDA provides several important observations about the Mushroom dataset.
